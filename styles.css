@@ -30,6 +30,6 @@ nav,ul,li {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
-.menu,.reservas,.contacto{
+#menu,#reservas,#contacto{
     text-align: center;
 }
