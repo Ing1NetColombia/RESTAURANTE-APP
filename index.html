@@ -2,51 +2,77 @@
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurante Remy</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Remy | www.Remy.com</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="shortcut icon" href="files/img/fondo.png">
+
 </head>
 
-<body>
-    <header>
-        <h1>Restaurante Remy</h1>
-        <nav>
-            <ul>
-                <li><a href="#menu">Menú</a></li>
-                <li><a href="#reservas">Reservas</a></li>
-                <li><a href="#contacto">Contacto</a></li>        
-            </ul>       
+<body >     
+    <header class="container">
+        <h1><a onclick="CargarContenido('vistas/inicio.html','contenido')"> Restaurante Remy </a></h1>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
+
+          <!-- Navbar Right Menu -->
+          <div  class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="#menu" onclick="CargarContenido('vistas/menu.html','contenido')">Menú</a></li>
+                <li class="nav-item"><a class="nav-link" href="#reservas" onclick="CargarContenido('vistas/reservas.html','contenido')">Reservas</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contacto" onclick="CargarContenido('vistas/contactos.html','contenido')">Contacto</a></li>
+                <!-- User Account: style can be found in dropdown.less -->
+            </ul>
+          </div>
+
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav" >
+                <li class="nav-item dropdown" >
+        
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="Sesionusu(true)">
+                        <img src="files/usuarios/user.png" class="user-image" style="max-width: 30px; border-radius: 50%; border-style: dashed; list-style: 0.5px;" alt="User Image">
+                        <span class="hidden-xs" style="text-transform: uppercase;">sergio</span> 
+                        <span >
+                            <i class="bi bi-box-arrow-right"></i>
+                        </span>
+                    </a>
+                    
+                    <ul class="dropdown-menu" aria-labelledby="userDropdown" >
+                        <div id="login">
+                            
+                        </div>
+                    </ul>
+                </li>
+            </ul>  
+          </div>
         </nav>
     </header>
     
-    <section id="menu" class="menu">
-        <h2>Menú</h2>
+    <div id="contenido">
+        <!--contenido de pagina-->
+    </div>    
 
-        <div class="menu-item">
-            <h3>Plato 1</h3>
-            <p>Descripción del primer plato.</p>
-            <p>Precio: $15.000</p>
+    <footer class="container">
+        <div class="text-end">
+          <b>Version</b> 0.0.1
         </div>
+        <strong>Remy &copy; 2023 <a href="#">www.Remy.com</a></strong>
+    </footer>
+    
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="js/script.js"></script>
 
-        <div class="menu-item">
-            <h3>Plato 2</h3>
-            <p>Descripción del segundo plato.</p>
-            <p>Precio: $12.000</p>
-        </div>
-        <!-- Agrega más platos aquí -->
-    </section>
-
-    <section id="reservas" class="reservas">
-        <h2>Reservas</h2>
-        <!-- Formulario de reservas -->
-    </section>
-
-    <section id="contacto" class="contacto">
-        <h2>Contacto</h2>
-        <p>¡Estamos encantados de atenderte! Contáctanos en: contacto@RestauranteRemy.com</p>
-    </section>
-    <script src="script.js"></script>
+    <script>
+        
+    </script>
 </body>
 
 </html>

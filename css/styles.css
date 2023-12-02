@@ -1,0 +1,39 @@
+body{       
+    font-family: Arial, sans-serif;           
+    margin: 0;
+    padding: 0;           
+    background-color: #f2f2f2;
+}
+
+header {
+    background-color: #f2f2f2;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+}
+
+nav,ul{
+    list-style: none;
+}
+
+nav,ul,li {
+    display: inline;
+    margin-right: 20px;
+}
+li {
+    font-family: Arial, sans-serif;
+    color: #f2f2f2;
+}
+
+.menu-item{
+    background-color: black;
+    color:#f2f2f2;    
+    padding: 20px;
+    margin: 10px;
+    border-radius: 5px;    
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.menu,.reservas,.contacto{
+    text-align: center;
+}
