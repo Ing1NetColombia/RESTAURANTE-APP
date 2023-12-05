@@ -1,6 +1,6 @@
 window.addEventListener("load",function(){CargarContenido('vistas/inicio.html','contenido')});
 
-var idsesion = false
+var idsesion = true
 
 function Sesionusu(elem){
 
@@ -15,7 +15,7 @@ function Sesionusu(elem){
         document.getElementById("loguser").style.display  = 'block';
         document.getElementById("iniuser").style.display  = 'none';
     }
-    }, 10);
+    }, 100);
     
 }
 
