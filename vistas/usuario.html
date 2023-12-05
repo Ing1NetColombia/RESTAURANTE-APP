@@ -1,37 +1,67 @@
 <!DOCTYPE html>
 <html lang="es">
-    <div id="loguser">
-        <!-- User image -->
-        <li class="user-header">
-            <img src="files/usuarios/user.png" class="img-circle" style="max-width: 300px; margin: 15px; border-color: #222d32; border-style: dashed solid; border-radius: 50%;" alt="User Image">
-            <p>
-                <small style= "color: black; margin: 15px;">correo@correo</small>
-            </p>
-        </li>
 
-        <!-- Menu Footer-->
+<div id="loguser">
+    <!-- User image -->
+    <li class="user-header">
+        <img src="files/usuarios/user.png" class="img-circle" alt="User Image" style=" margin: 15px; max-width: 300px; border-color: #222d32; border-style: dashed solid; border-radius: 50%;">
+        <p>
+            <small style="color: black; margin: 15px;">correo@correo</small>
+        </p>
+    </li>
+
+    <!-- Menu Footer-->
+    <li class="user-footer" style="background-color: #222d32;">
+
+        <div class="text-end">
+            <button href="#" class="btn btn-default btn-flat"
+                style="border-radius: 14px; background-color:#f2f2f2; margin: 15px;">Cerrar Sesion</button>
+        </div>
+    </li>
+</div>
+
+<div id="iniuser" style="max-width: 330px;">
+    <!-- User image -->
+    <li class="user-header">
+        <img src="files/usuarios/user.png" class="img-circle" alt="User Image" style=" margin: 15px; max-width: 300px; border-color: #222d32; border-style: dashed solid; border-radius: 50%;">
+    </li>
+
+    <!-- Menu Footer-->
+    <li class="user-footer" style="background-color: #222d32;" id="login">
+        <input type="text" id="logina" name="logina" class="form-control" placeholder="Usuario" style="max-width: 300px; margin: 15px;"> 
+        <input type="password" id="clavea" name="clavea" class="form-control" placeholder="Contraseña" style="max-width: 300px; margin: 15px;">
+
         <li class="user-footer" style="background-color: #222d32;">
 
             <div class="text-end">
-                <button href="#" class="btn btn-default btn-flat" style="border-radius: 14px; background-color:#f2f2f2; margin: 15px;">Cerrar Sesion</button>
+                <button href="#" class="btn btn-default btn-flat"
+                    style="border-radius: 14px; background-color:#f2f2f2; margin: 15px;"
+                    onclick="Sesionusu(true)">Iniciar Sesion</button>
+                <button href="#" class="btn btn-default btn-flat"
+                    style="border-radius: 14px; background-color:#f2f2f2; margin: 15px;">Registrar</button>
             </div>
         </li>
-    </div>
 
-    <div id="iniuser">
-        <!-- User image -->
-        <li class="user-header">
-            <img src="files/usuarios/user.png" class="img-circle" style="max-width: 300px; margin: 15px; border-color: #222d32; border-style: dashed solid; border-radius: 50%;" alt="User Image">
-            
-        </li>
-
-        <!-- Menu Footer-->
+        <!-- Remind Passowrd -->
+        <div class="text-end">
+            <a class="underlineHover" onclick="mostrarform(true)">Olvido la contraseña?</a>
+        </div>        
+    </li>
+    <li class="user-footer" style="background-color: #222d32;" id="regusu">
+        <input type="text" id="usuario" name="usuario" class="form-control" placeholder="Usuario" style="max-width: 90%; margin: 15px;">
+        <input type="text" id="email" name="email" class="form-control" placeholder="Correo electronico" style="max-width: 90%; margin: 15px;">
+        
         <li class="user-footer" style="background-color: #222d32;">
 
             <div class="text-end">
-                <button href="#" class="btn btn-default btn-flat" style="border-radius: 14px; background-color:#f2f2f2; margin: 15px;" onclick="CargarContenido('vistas/login.html','login')">Iniciar Sesion</button>
-                <button href="#" class="btn btn-default btn-flat" style="border-radius: 14px; background-color:#f2f2f2; margin: 15px;">Registrar</button>
+                <button href="#" class="btn btn-default btn-flat"
+                    style="border-radius: 14px; background-color:#f2f2f2; margin: 15px;"
+                    onclick="Sesionusu(true)">Validar</button>
+                <button href="#" class="btn btn-default btn-flat"
+                    style="border-radius: 14px; background-color:#f2f2f2; margin: 15px;">cancelar</button>
             </div>
-        </li>
-    </div>
+        </li> 
+    </li>
+</div>
+
 </html>

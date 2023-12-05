@@ -1,17 +1,21 @@
 window.addEventListener("load",function(){CargarContenido('vistas/inicio.html','contenido')});
 
+var idsesion = false
+
 function Sesionusu(elem){
 
     CargarContenido('vistas/usuario.html','login');
 
-    if(elem){
-        iniuser.style.display  = 'block';
-        loguser.style.display  = 'none';
+    setTimeout(() => {
+        if(elem){
+        document.getElementById("iniuser").style.display  = 'block';
+        document.getElementById("loguser").style.display  = 'none';
     }else
     {
-        loguser.style.display  = 'block';
-        iniuser.style.display  = 'none';
+        document.getElementById("loguser").style.display  = 'block';
+        document.getElementById("iniuser").style.display  = 'none';
     }
+    }, 10);
     
 }
 
