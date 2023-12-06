@@ -1,25 +1,8 @@
-window.addEventListener("load",function(){CargarContenido('vistas/inicio.html','contenido')});
+window.addEventListener("load",function(){CargarContenido('vistas/inicio.html','contenido','inicio')});
 
 var idsesion = true
 
-function Sesionusu(elem){
-
-    CargarContenido('vistas/usuario.html','login');
-
-    setTimeout(() => {
-        if(elem){
-        document.getElementById("iniuser").style.display  = 'block';
-        document.getElementById("loguser").style.display  = 'none';
-    }else
-    {
-        document.getElementById("loguser").style.display  = 'block';
-        document.getElementById("iniuser").style.display  = 'none';
-    }
-    }, 100);
-    
-}
-
-function CargarContenido(url, div){
+function CargarContenido(url, div, from){
     var getUrl = window.location;
     var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + url;
     
@@ -37,7 +20,22 @@ function CargarContenido(url, div){
             var contenido = document.getElementById(div);
             contenido.innerHTML = html;
             ejecutarScriptsEnContenido(contenido);
+
+            switch(from){
+                case "productos":
+                    Leerproductos('table');
+                    break
+                case "login":
+                    Sesionusu(idsesion);
+                    break
+                case "inicio":
+                    Leerproductos('card');
+                    break
+            }
+
     })
+
+    
 }
 
 function ejecutarScriptsEnContenido(elemento) {

@@ -1,0 +1,90 @@
+<div class="container-fluid">
+    <!-- Main content -->
+    <section class="content">
+        <div >
+          <div >
+              <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title" id="titusuario">Productos <button class="btn btn-success" style='margin-left: 10px;' id="btnagregar" onclick="mostrarform(true)"><i class="fa fa-plus-circle"></i> Agregar</button><h1>
+                    <div class="box-tools pull-right">
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <!-- centro -->
+                <div class="card-body">
+                    <div class="table-responsive" >
+                        <table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
+                        <thead>
+                            <th>Opciones</th>
+                            <th>Nombre</th>
+                            <th>Descripcion</th>
+                            <th>Valor</th>
+                            <th>Recomendado</th>
+                        </thead>
+                        <tbody id="tblproductos">
+                        </tbody>                        
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card-body" style="height: auto;" id="formularioregistros">
+                <div class="card-header">
+                    <form name="formulario" id="formulario" >
+                    <div class="row">
+                      <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <label>Nombre(*):</label>
+                        <input type="hidden" class="form-control" id="idproducto">
+                        <input type="text" class="form-control" id="nomproducto" maxlength="80" placeholder="Nombre" required>
+                      </div>
+                      <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <label>Descripcion(*):</label>
+                        <input type="text" class="form-control" id="descripcion" maxlength="45" placeholder="descripcion" required>
+                      </div>
+                       <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <label>Valor(*):</label>
+                        <input type="number" class="form-control" id="valor" maxlength="45" placeholder="valor" required>
+                      </div>
+                      <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <label>categoria:</label>
+                        <select  name="idcategoria" id="idcategoria" class="form-control selectpicker" data-live-search="true" data required>
+                          <option value="0">Rex</optrion>
+                          <option value="1">Pollo</option>
+                          <option value="2">Pescado</option>
+                          <option value="3">Bebidas</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <label for='image-input'>Seleccionar Imagen</label>
+                        <input id='image-input' type='file' accept='image/*' class="form-control" id="valor" maxlength="45" placeholder="valor">
+                        <button onclick="cargarImagen()">Cargar Imagen</button>
+                        <input type="number"  required>
+                    </div>
+                    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
+                    <label>Recomendado:</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="opciones" id="recomendado" value="1" >
+                            <label class="form-check-label" for="recomendado">
+                               Si
+                            </label>
+                        </div>
+                    </div>
+                      <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">   
+                        <button class="btn btn-primary" onclick="guardarproducto()"><i class="fa fa-save"></i> Guardar</button>
+
+                        <button class="btn btn-danger" onclick="cancelarform()" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                      </div>
+                    </form>
+                </div>
+                <!--Fin centro -->
+              </div><!-- /.box -->
+          </div><!-- /.col -->
+      </div><!-- /.row -->
+  </section><!-- /.content -->
+  
+<script src="modelos/productos.js"></script>
+<script>
+    
+</script>
+
+</div><!-- /.content-wrapper -->
