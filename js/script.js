@@ -29,13 +29,15 @@ function CargarContenido(url, div, from){
                     Sesionusu(idsesion);
                     break
                 case "inicio":
+                    Leerproductos('card2');
+                    break
+                case "menu":
                     Leerproductos('card');
                     break
             }
 
     })
 
-    
 }
 
 function ejecutarScriptsEnContenido(elemento) {
@@ -52,3 +54,49 @@ function ejecutarScriptsEnContenido(elemento) {
     });
 }  
 
+function cargarImagen(elem) {
+    const input = document.getElementById(elem);
+
+    // Verificar si se seleccionó un archivo
+    if (input.files.length > 0) {
+      const file = input.files[0];
+  
+      // Convertir la imagen a base64
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const base64Image = e.target.result;
+  
+        // Guardar la imagen en localStorage
+        localStorage.setItem('objImage', base64Image);
+  
+        Swal.fire({
+          title: "Completado",
+          text: "Imagen cargada correctamente.",
+          icon: "success"
+        });
+  
+      };
+  
+      reader.readAsDataURL(file);
+    } else {
+      
+      Swal.fire({
+        title: "Oops...",
+        text: "selecciona una imagen antes de intentar cargarla.",
+        icon: "error"
+      });
+  
+    }
+}
+
+function getBase64Image(img) {
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    var dataURL = canvas.toDataURL();
+    return dataURL;
+}
+  
+  

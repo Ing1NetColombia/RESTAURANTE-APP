@@ -56,32 +56,63 @@ function guardarproducto(){
     let descripcion = document.getElementById("descripcion").value;
     let valor = document.getElementById("valor").value;
     let categoria = document.getElementById("idcategoria").value;
-    let recomendado = document.getElementById("recomendado").value;
-  
+    let recomendado = document.querySelector('input[name="recomendado"]:checked').value;
+    //let recomendado = document.getElementById("recomendado").value;
+
+    // Obtener una referencia al input de tipo archivo
+    //cargarImagen('imgproduc')
+   // Evento para cargar la imagen al seleccionar un archivo
+   var inputFile = document.getElementById('imgproduc');
+   inputFile.addEventListener('change', function() {
+
+       if (this.files && this.files[0]) {
+           
+           var reader = new FileReader();
+
+           reader.onload = function(e) {
+               localStorage.setItem('objimagen', e.target.result);
+           }
+           reader.readAsDataURL(this.files[0]);
+       }
+
+       //cargar imagen en Previewfoto
+       //var imagen = document.getElementById('Previewfoto');
+       //imagen.src = imgSrc;
+   });
+   
+    //leer imagen de localstorage
+    var imgSrc = localStorage.getItem('objimagen');
     var produc = JSON.parse(localStorage.getItem("produc")) || [];
-         //alerta(book);
+    
       var a_produtos = produc.filter(function(produc_f){
-          return (produc_f["produc"] == nombre);
+          return (produc_f.idproducto == id);
       });
+
       alert(nombre)
      if(a_produtos.length > 0){
         alert("Producto ya existe");
+        //limpiar imagen
+        localStorage.removeItem('objImage');
         return;
     }
 
-    let produc_r = { "idproducto" : id,"nomproducto":nombre,"descripcion" : descripcion,"valor" : valor,"idcategoria":categoria,"recomendado" : recomendado}
+    let produc_r = {"idproducto":id,"nomproducto":nombre,"descripcion" : descripcion,
+                    "valor":valor,"idcategoria":categoria,"recomendado":recomendado,
+                    "imgproduc":imgSrc}
+
     produc.push(produc_r);
   
     localStorage.setItem("produc", JSON.stringify(produc));
-      alert("Registro completo");
-      document.getElementById("incio").reset();
+
+    //limpiar imagen
+    localStorage.removeItem('objImage');
+    
+    alert("Registro completo");
   
 }
 
 function Leerproductos(elem) {
     var produc = JSON.parse(localStorage.getItem("produc")) || [];
-
-    
   
         switch(elem){
             case 'table':
@@ -91,38 +122,84 @@ function Leerproductos(elem) {
                 produc.forEach(function (producto) {
                     var cadena =`<tr>
                                     <td>
-                                        <button class="btn btn-primary" onclick="EditarProducto(${producto.id})">
-                                            Editar <span class="bi bi-eye"></span>
+                                        <button class="btn btn-primary" onclick="EditarProducto(${producto.idproducto})">
+                                            Editar 
                                         </button>
                                         
-                                        <button class="btn btn-warning" onclick="EliminarProducto(${producto.id})">
-                                            Eliminar <span class="bi bi-bar-chart"></span>
+                                        <button class="btn btn-warning" onclick="EliminarProducto(${producto.idproducto})">
+                                            Eliminar 
                                         </button>
                                     </td>
+                                    <td>${producto.idproducto}</td>
                                     <td>${producto.nomproducto}</td>
                                     <td>${producto.descripcion}</td>
-                                    <td>${producto.valor}</td>
                                     <td>${producto.idcategoria}</td> 
+                                    <td>${producto.valor}</td>
                                     <td>${producto.recomendado}</td>             
                                 </tr>`;
                                 tblProductos.innerHTML += cadena;
                 });
+                break
+
             case 'card':
                 var CardProductos = document.getElementById("CardProductos");
                 console.log(CardProductos)
+                if(produc == []){
+                    break
+                }
                 CardProductos.innerHTML = "";
                 produc.forEach(function (producto) {
-                    var cadena =`<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    var cadena =`<div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h3 class="card-title">${producto.nomproducto}</h3>
-                                            <p class="card-text">${producto.descripcion}</p>
-                                            <p class="card-text">${producto.valor}</p>
+                                            <div class="row">
+                                                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                    <img src="${producto.imgproduc}" class="img-circle" style="max-width: 170px;" alt="Item Image">
+                                                </div>
+                                                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                    <h3 class="card-title">${producto.nomproducto}</h3>
+                                                    <p class="card-text">${producto.descripcion}</p>
+                                                    <p class="card-text">Precio: $${producto.valor}</p>
+                                                </div>
+                                            </div>                        
                                         </div>
                                     </div>
                                 </div>`;
                                 CardProductos.innerHTML += cadena;
                 });
+                break
+
+            case 'card2':
+                
+                var CardProductos = document.getElementById("CardProductos");
+                console.log(CardProductos)
+                if(produc.length == []){
+                    break
+                }
+                CardProductos.innerHTML = "";
+                produc.forEach(function (producto) {
+                    if(producto.recomendado == "1"){
+                        var cadena =`<div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                        <img src="${producto.imgproduc}" class="img-circle" style="max-width: 170px;" alt="Item Image">
+                                                    </div>
+                                                    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                        <h3 class="card-title">${producto.nomproducto}</h3>
+                                                        <p class="card-text">${producto.descripcion}</p>
+                                                        <p class="card-text">Precio: $${producto.valor}</p>
+                                                    </div>
+                                                </div>                        
+                                            </div>
+                                        </div>
+                                    </div>`;
+                                    CardProductos.innerHTML += cadena;
+                    }
+                });
+                break
+
         }
 }
 
@@ -136,7 +213,7 @@ function EditarProducto(id) {
     var objid = document.getElementById("idproducto");
     var objnombre = document.getElementById("nomproducto");
     var objdescripcion = document.getElementById("descripcion");
-    var objvalor = document.getElementById("valor").value;
+    var objvalor = document.getElementById("valor");
     var objcategoria = document.getElementById("idcategoria");
     var objrecomendado = document.getElementById("recomendado");
 
@@ -152,11 +229,11 @@ function EliminarProducto(id) {
     var produc = JSON.parse(localStorage.getItem("produc")) || [];
 
     var productosFiltrados = produc.filter(function (producto) {
-        return producto.id != id;
+        return producto.idproducto != id;
     });
 
     localStorage.setItem("produc", JSON.stringify(productosFiltrados));
-    Leerusuario();
+    Leerproductos('table');
 }
 
   //Función mostrar formulario
