@@ -59,29 +59,24 @@ function guardarproducto(){
     let recomendado = document.querySelector('input[name="recomendado"]:checked').value;
     //let recomendado = document.getElementById("recomendado").value;
 
-    // Obtener una referencia al input de tipo archivo
-    //cargarImagen('imgproduc')
-   // Evento para cargar la imagen al seleccionar un archivo
-   var inputFile = document.getElementById('imgproduc');
-   inputFile.addEventListener('change', function() {
+    // Ejemplo de uso en un input de tipo file
+    const input = document.getElementById('tuInputDeArchivo'); // Reemplaza 'tuInputDeArchivo' con el ID de tu input file
+    input.addEventListener('change', function () {
+        const file = this.files[0];
 
-       if (this.files && this.files[0]) {
-           
-           var reader = new FileReader();
+        if (file) {
+            convertirImagenABase64(file, function (base64String) {
+                console.log(base64String);
+                // Aquí puedes trabajar con la cadena base64, por ejemplo, mostrar la imagen en un elemento <img>
+                // Ejemplo:
+                // const imgElement = document.getElementById('tuElementoImg'); // Reemplaza 'tuElementoImg' con el ID de tu elemento <img>
+                // imgElement.src = base64String;
+            });
+        }
+    });
 
-           reader.onload = function(e) {
-               localStorage.setItem('objimagen', e.target.result);
-           }
-           reader.readAsDataURL(this.files[0]);
-       }
+    alert(base64String);
 
-       //cargar imagen en Previewfoto
-       //var imagen = document.getElementById('Previewfoto');
-       //imagen.src = imgSrc;
-   });
-   
-    //leer imagen de localstorage
-    var imgSrc = localStorage.getItem('objimagen');
     var produc = JSON.parse(localStorage.getItem("produc")) || [];
     
       var a_produtos = produc.filter(function(produc_f){
@@ -98,7 +93,7 @@ function guardarproducto(){
 
     let produc_r = {"idproducto":id,"nomproducto":nombre,"descripcion" : descripcion,
                     "valor":valor,"idcategoria":categoria,"recomendado":recomendado,
-                    "imgproduc":imgSrc}
+                    "imgproduc":base64String}
 
     produc.push(produc_r);
   

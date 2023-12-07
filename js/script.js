@@ -56,6 +56,8 @@ function ejecutarScriptsEnContenido(elemento) {
 
 function cargarImagen(elem) {
     const input = document.getElementById(elem);
+    
+    localStorage.removeItem("objImage");
 
     // Verificar si se seleccionó un archivo
     if (input.files.length > 0) {
@@ -99,4 +101,16 @@ function getBase64Image(img) {
     return dataURL;
 }
   
-  
+
+function convertirImagenABase64(inputFile, callback) {
+    const fileReader = new FileReader();
+
+    fileReader.onload = function (e) {
+        const base64String = e.target.result;
+        callback(base64String);
+    };
+
+    // Lee el archivo como una URL de datos (data URL)
+    fileReader.readAsDataURL(inputFile);
+}
+
