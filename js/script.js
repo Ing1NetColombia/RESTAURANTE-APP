@@ -92,17 +92,6 @@ function cargarImagen(elem) {
     }
 }
 
-function getBase64Image(img) {
-    var canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);4
-    var dataURL = canvas.toDataURL();
-    return dataURL;
-}
-
-
 function convertirImagenABase64(inputFile, callback) {
     const fileReader = new FileReader();
 

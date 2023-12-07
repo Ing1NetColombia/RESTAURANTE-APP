@@ -71,8 +71,7 @@
                                         <label for='imgproduc'>Seleccionar Imagen</label>
                                         <input id='imgproduc' type='file' accept='image/*' class="form-control"
                                             id="valor" maxlength="45" placeholder="sEELCCIONE UNA IMAGEN ">
-                                        <button onclick="cargarImagen('imgproduc')" class="btn btn-primary">Cargar
-                                            Imagen</button>
+                                        
                                     </div>
                                     <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <label>Recomendado:</label>
@@ -100,5 +99,24 @@
     </section><!-- /.content -->
 
     <script src="modelos/productos.js"></script>
+    <script>
+        localStorage.removeItem("objImage");
+
+        // Ejemplo de uso en un input de tipo file
+        const input = document.getElementById('imgproduc'); // Reemplaza 'tuInputDeArchivo' con el ID de tu input file
+        input.addEventListener('change', function () {
+            const file = this.files[0];
+
+            if (file) {
+                convertirImagenABase64(file, function (base64String) {
+                    // Guardar la imagen en localStorage
+                    localStorage.setItem('objImage', base64String);
+
+                    const imgElement = document.getElementById('tuElementoImg'); // Reemplaza 'tuElementoImg' con el ID de tu elemento <img>
+                    imgElement.src = base64String;
+                });
+            }
+        });
+    </script>
 
 </div><!-- /.content-wrapper -->

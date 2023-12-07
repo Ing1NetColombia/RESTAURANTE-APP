@@ -59,24 +59,12 @@ function guardarproducto() {
     let recomendado = document.querySelector('input[name="recomendado"]:checked').value;
     //let recomendado = document.getElementById("recomendado").value;
 
-    // Ejemplo de uso en un input de tipo file
-    const input = document.getElementById('tuInputDeArchivo'); // Reemplaza 'tuInputDeArchivo' con el ID de tu input file
-    input.addEventListener('change', function () {
-        const file = this.files[0];
+    if (id == '' || nombre == '' || descripcion == '' || valor == '' || categoria == '' || recomendado == '') {
+        alert("Favor de llenar todos los campos");
+        return;
+    }
 
-        if (file) {
-            convertirImagenABase64(file, function (base64String) {
-                console.log(base64String);
-                // Aquí puedes trabajar con la cadena base64, por ejemplo, mostrar la imagen en un elemento <img>
-                // Ejemplo:
-                // const imgElement = document.getElementById('tuElementoImg'); // Reemplaza 'tuElementoImg' con el ID de tu elemento <img>
-                // imgElement.src = base64String;
-            });
-        }
-    });
-
-    alert(base64String);
-
+    var imgproduc = localStorage.getItem("objImage") || [];
     var produc = JSON.parse(localStorage.getItem("produc")) || [];
 
     var a_produtos = produc.filter(function (produc_f) {
@@ -94,7 +82,7 @@ function guardarproducto() {
     let produc_r = {
         "idproducto": id, "nomproducto": nombre, "descripcion": descripcion,
         "valor": valor, "idcategoria": categoria, "recomendado": recomendado,
-        "imgproduc": base64String
+        "imgproduc":imgproduc
     }
 
     produc.push(produc_r);
