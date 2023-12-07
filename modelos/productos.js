@@ -60,7 +60,13 @@ function guardarproducto() {
     //let recomendado = document.getElementById("recomendado").value;
 
     if (id == '' || nombre == '' || descripcion == '' || valor == '' || categoria == '' || recomendado == '') {
-        alert("Favor de llenar todos los campos");
+        localStorage.removeItem("objImage");
+        Swal.fire({
+            title: "Error",
+            text: "Favor de llenar todos los campos.",
+            icon: "success"
+        });
+        //alert("Favor de llenar todos los campos");
         return;
     }
 
@@ -71,11 +77,14 @@ function guardarproducto() {
         return (produc_f.idproducto == id);
     });
 
-    alert(nombre)
     if (a_produtos.length > 0) {
-        alert("Producto ya existe");
-        //limpiar imagen
-        localStorage.removeItem('objImage');
+        localStorage.removeItem("objImage");
+        Swal.fire({
+            title: "Error",
+            text: "Producto ya existe.",
+            icon: "success"
+        });
+        //alert("Producto ya existe");
         return;
     }
 
@@ -88,11 +97,14 @@ function guardarproducto() {
     produc.push(produc_r);
 
     localStorage.setItem("produc", JSON.stringify(produc));
+    localStorage.removeItem("objImage");
 
-    //limpiar imagen
-    localStorage.removeItem('objImage');
-
-    alert("Registro completo");
+    Swal.fire({
+        title: "Completo",
+        text: "Registro completo.",
+        icon: "success"
+    });
+    //alert("Registro completo");
 
 }
 
@@ -102,7 +114,7 @@ function Leerproductos(elem) {
     switch (elem) {
         case 'table':
             var tblProductos = document.getElementById("tblproductos");
-            console.log(tblProductos)
+
             tblProductos.innerHTML = "";
             produc.forEach(function (producto) {
                 var cadena = `<tr>
@@ -120,7 +132,9 @@ function Leerproductos(elem) {
                                     <td>${producto.descripcion}</td>
                                     <td>${producto.idcategoria}</td> 
                                     <td>${producto.valor}</td>
-                                    <td>${producto.recomendado}</td>             
+                                    <td>${producto.recomendado}</td>
+                                    <td><img src=${producto.imgproduc} style="max-width: 50px;"
+                                    alt="Item Image"></td>
                                 </tr>`;
                 tblProductos.innerHTML += cadena;
             });
@@ -128,8 +142,8 @@ function Leerproductos(elem) {
 
         case 'card':
             var CardProductos = document.getElementById("CardProductos");
-            console.log(CardProductos)
-            if (produc == []) {
+
+            if (produc.length == []) {
                 break
             }
             CardProductos.innerHTML = "";
@@ -139,14 +153,14 @@ function Leerproductos(elem) {
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                                    <img src="${producto.imgproduc}" class="img-circle" style="max-width: 170px;" alt="Item Image">
+                                                    <img src="${producto.imgproduc}" class="rounded-circle" style="max-width: 170px;" alt="Item Image">
                                                 </div>
                                                 <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                                     <h3 class="card-title">${producto.nomproducto}</h3>
                                                     <p class="card-text">${producto.descripcion}</p>
                                                     <p class="card-text">Precio: $${producto.valor}</p>
                                                 </div>
-                                            </div>                        
+                                            </div>
                                         </div>
                                     </div>
                                 </div>`;
@@ -157,7 +171,7 @@ function Leerproductos(elem) {
         case 'card2':
 
             var CardProductos = document.getElementById("CardProductos");
-            console.log(CardProductos)
+
             if (produc.length == []) {
                 break
             }
@@ -169,14 +183,14 @@ function Leerproductos(elem) {
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                                        <img src="${producto.imgproduc}" class="img-circle" style="max-width: 170px;" alt="Item Image">
+                                                        <img src="${producto.imgproduc}" class="rounded-circle" style="max-width: 170px;" alt="Item Image">
                                                     </div>
                                                     <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                                         <h3 class="card-title">${producto.nomproducto}</h3>
                                                         <p class="card-text">${producto.descripcion}</p>
                                                         <p class="card-text">Precio: $${producto.valor}</p>
                                                     </div>
-                                                </div>                        
+                                                </div>
                                             </div>
                                         </div>
                                     </div>`;

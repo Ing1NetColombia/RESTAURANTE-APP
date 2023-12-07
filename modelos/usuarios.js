@@ -1,4 +1,8 @@
 function Sesionusu(elem) {
+    var sesion = JSON.parse(localStorage.getItem("sesion")) || [];
+    if (sesion.length == []){
+
+    }
     setTimeout(() => {
         if (elem) {
             document.getElementById("iniuser").style.display = 'block';
@@ -21,31 +25,26 @@ function guardarusuario() {
     let email = document.getElementById("email").value;
     let telefono = document.getElementById("telefono").value;
 
-    console.log(document.getElementById("puser"))
-    alert(usuario)
-
     if (id == '' || nombre == '' || usuario == '' || contrasena == '' || email == '' || telefono == '') {
         alert("Favor de llenar todos los campos");
         return;
     }
 
+    var imguser = localStorage.getItem("objImage") || [];
     var user = JSON.parse(localStorage.getItem("user")) || [];
-    console.log(user);
+
     var a_usuario = user.filter(function (user_f) {
         return (user_f["user"] == id);
     });
-
-    alert(id)
 
     if (a_usuario.length > 0) {
         alert("Usuario ya existe");
         return;
     }
 
-    let usuario_r = { "idusuario": id, "nomusuario": nombre, "usuario": usuario, "webcontrasena": contrasena, "email": email, "telefono": telefono }
+    let usuario_r = { "idusuario":id, "nomusuario":nombre, "usuario":usuario, "webcontrasena":contrasena, "email":email, "telefono":telefono, "imguser":imguser }
     user.push(usuario_r);
-    console.log(user);
-    console.log(usuario_r);
+
     localStorage.setItem("user", JSON.stringify(user));
     alert("Registro completo");
 
@@ -107,3 +106,47 @@ function Eliminarusuario(id) {
     localStorage.setItem("user", JSON.stringify(usuariosFiltrados));
     Leerusuario();
 }
+
+function iniciarSesion() {
+    let usuario = document.getElementById("logina").value;
+    let contra = document.getElementById("clavea").value;
+  
+    var users = JSON.parse(localStorage.getItem("user")) || [];
+    var userLog = null;
+  
+    if (users.length > 0) {
+      users.forEach(function(usuarios_f) {
+        var nombreUsuario = usuarios_f["usuario_init"];
+        
+        if (nombreUsuario === usuario) {
+          userLog = usuarios_f;
+          return;
+        }
+      });
+    } else {
+      console.log("No hay usuarios almacenados en el localStorage");
+    }
+  
+    if (!userLog) {
+      alert("Usuario no encontrado");
+      return;
+    }
+  
+    if (userLog["contra_init"] !== contra) {
+      alert("Contraseña incorrecta");
+      return;
+    }
+  
+    localStorage.setItem("usuarioActual", JSON.stringify(userLog));
+  
+    console.log("Antes de la redirección");
+  
+    // var local = window.location.href
+    
+    // Cambiar la ubicación (URL) a "login_2.html"
+    window.location.href = "../index.html";
+    // alert("ingresando")
+  
+    // Este mensaje puede no mostrarse inmediatamente debido a la redirección
+    // console.log("Después de la redirección");
+  }

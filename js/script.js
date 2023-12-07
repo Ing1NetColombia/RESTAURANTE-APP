@@ -14,7 +14,6 @@ function CargarContenido(url, div, from) {
 
     fetch(url)
         .then(function (response) {
-            //console.log(response.text());
             return response.text();
         })
         .then(function (html) {
@@ -55,7 +54,7 @@ function ejecutarScriptsEnContenido(elemento) {
     });
 }
 
-function cargarImagen(elem) {
+/*function cargarImagen(elem) {
     const input = document.getElementById(elem);
 
     localStorage.removeItem("objImage");
@@ -90,7 +89,7 @@ function cargarImagen(elem) {
         });
 
     }
-}
+}*/
 
 function convertirImagenABase64(inputFile, callback) {
     const fileReader = new FileReader();
