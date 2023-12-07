@@ -1,27 +1,28 @@
-window.addEventListener("load",function(){CargarContenido('vistas/inicio.html','contenido','inicio')});
+window.addEventListener("load", function () { CargarContenido('vistas/inicio.html', 'contenido', 'inicio') });
 
 var idsesion = true
 
-function CargarContenido(url, div, from){
+function CargarContenido(url, div, from) {
     var getUrl = window.location;
     var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + url;
-    
+
     var urlP = new URL(baseUrl);
     var id = urlP.searchParams.get("id");
-    if(id != null){
+    if (id != null) {
         localStorage.setItem("id", id);
-    }                       
+    }
 
     fetch(url)
-        .then(function(response){ 
+        .then(function (response) {
             //console.log(response.text());
-            return response.text();})
-        .then(function(html) {
+            return response.text();
+        })
+        .then(function (html) {
             var contenido = document.getElementById(div);
             contenido.innerHTML = html;
             ejecutarScriptsEnContenido(contenido);
 
-            switch(from){
+            switch (from) {
                 case "productos":
                     Leerproductos('table');
                     break
@@ -36,14 +37,14 @@ function CargarContenido(url, div, from){
                     break
             }
 
-    })
+        })
 
 }
 
 function ejecutarScriptsEnContenido(elemento) {
     const scripts = elemento.querySelectorAll('script');
 
-    if(!scripts){
+    if (!scripts) {
         return;
     }
 
@@ -52,42 +53,42 @@ function ejecutarScriptsEnContenido(elemento) {
         nuevoScript.text = script.text;
         script.parentNode.replaceChild(nuevoScript, script);
     });
-}  
+}
 
 function cargarImagen(elem) {
     const input = document.getElementById(elem);
-    
+
     localStorage.removeItem("objImage");
 
     // Verificar si se seleccionó un archivo
     if (input.files.length > 0) {
-      const file = input.files[0];
-  
-      // Convertir la imagen a base64
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const base64Image = e.target.result;
-  
-        // Guardar la imagen en localStorage
-        localStorage.setItem('objImage', base64Image);
-  
-        Swal.fire({
-          title: "Completado",
-          text: "Imagen cargada correctamente.",
-          icon: "success"
-        });
-  
-      };
-  
-      reader.readAsDataURL(file);
+        const file = input.files[0];
+
+        // Convertir la imagen a base64
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const base64Image = e.target.result;
+
+            // Guardar la imagen en localStorage
+            localStorage.setItem('objImage', base64Image);
+
+            Swal.fire({
+                title: "Completado",
+                text: "Imagen cargada correctamente.",
+                icon: "success"
+            });
+
+        };
+
+        reader.readAsDataURL(file);
     } else {
-      
-      Swal.fire({
-        title: "Oops...",
-        text: "selecciona una imagen antes de intentar cargarla.",
-        icon: "error"
-      });
-  
+
+        Swal.fire({
+            title: "Oops...",
+            text: "selecciona una imagen antes de intentar cargarla.",
+            icon: "error"
+        });
+
     }
 }
 
@@ -96,11 +97,11 @@ function getBase64Image(img) {
     canvas.width = img.width;
     canvas.height = img.height;
     var ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
+    ctx.drawImage(img, 0, 0);4
     var dataURL = canvas.toDataURL();
     return dataURL;
 }
-  
+
 
 function convertirImagenABase64(inputFile, callback) {
     const fileReader = new FileReader();

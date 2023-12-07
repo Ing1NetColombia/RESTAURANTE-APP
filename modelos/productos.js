@@ -50,7 +50,7 @@ const exampleProduct = {
 productTable.addProduct(exampleProduct);
 */
 
-function guardarproducto(){
+function guardarproducto() {
     let id = document.getElementById("idproducto").value;
     let nombre = document.getElementById("nomproducto").value;
     let descripcion = document.getElementById("descripcion").value;
@@ -78,44 +78,46 @@ function guardarproducto(){
     alert(base64String);
 
     var produc = JSON.parse(localStorage.getItem("produc")) || [];
-    
-      var a_produtos = produc.filter(function(produc_f){
-          return (produc_f.idproducto == id);
-      });
 
-      alert(nombre)
-     if(a_produtos.length > 0){
+    var a_produtos = produc.filter(function (produc_f) {
+        return (produc_f.idproducto == id);
+    });
+
+    alert(nombre)
+    if (a_produtos.length > 0) {
         alert("Producto ya existe");
         //limpiar imagen
         localStorage.removeItem('objImage');
         return;
     }
 
-    let produc_r = {"idproducto":id,"nomproducto":nombre,"descripcion" : descripcion,
-                    "valor":valor,"idcategoria":categoria,"recomendado":recomendado,
-                    "imgproduc":base64String}
+    let produc_r = {
+        "idproducto": id, "nomproducto": nombre, "descripcion": descripcion,
+        "valor": valor, "idcategoria": categoria, "recomendado": recomendado,
+        "imgproduc": base64String
+    }
 
     produc.push(produc_r);
-  
+
     localStorage.setItem("produc", JSON.stringify(produc));
 
     //limpiar imagen
     localStorage.removeItem('objImage');
-    
+
     alert("Registro completo");
-  
+
 }
 
 function Leerproductos(elem) {
     var produc = JSON.parse(localStorage.getItem("produc")) || [];
-  
-        switch(elem){
-            case 'table':
-                var tblProductos = document.getElementById("tblproductos");
-                console.log(tblProductos)
-                tblProductos.innerHTML = "";
-                produc.forEach(function (producto) {
-                    var cadena =`<tr>
+
+    switch (elem) {
+        case 'table':
+            var tblProductos = document.getElementById("tblproductos");
+            console.log(tblProductos)
+            tblProductos.innerHTML = "";
+            produc.forEach(function (producto) {
+                var cadena = `<tr>
                                     <td>
                                         <button class="btn btn-primary" onclick="EditarProducto(${producto.idproducto})">
                                             Editar 
@@ -132,19 +134,19 @@ function Leerproductos(elem) {
                                     <td>${producto.valor}</td>
                                     <td>${producto.recomendado}</td>             
                                 </tr>`;
-                                tblProductos.innerHTML += cadena;
-                });
-                break
+                tblProductos.innerHTML += cadena;
+            });
+            break
 
-            case 'card':
-                var CardProductos = document.getElementById("CardProductos");
-                console.log(CardProductos)
-                if(produc == []){
-                    break
-                }
-                CardProductos.innerHTML = "";
-                produc.forEach(function (producto) {
-                    var cadena =`<div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
+        case 'card':
+            var CardProductos = document.getElementById("CardProductos");
+            console.log(CardProductos)
+            if (produc == []) {
+                break
+            }
+            CardProductos.innerHTML = "";
+            produc.forEach(function (producto) {
+                var cadena = `<div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="row">
@@ -160,21 +162,21 @@ function Leerproductos(elem) {
                                         </div>
                                     </div>
                                 </div>`;
-                                CardProductos.innerHTML += cadena;
-                });
-                break
+                CardProductos.innerHTML += cadena;
+            });
+            break
 
-            case 'card2':
-                
-                var CardProductos = document.getElementById("CardProductos");
-                console.log(CardProductos)
-                if(produc.length == []){
-                    break
-                }
-                CardProductos.innerHTML = "";
-                produc.forEach(function (producto) {
-                    if(producto.recomendado == "1"){
-                        var cadena =`<div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
+        case 'card2':
+
+            var CardProductos = document.getElementById("CardProductos");
+            console.log(CardProductos)
+            if (produc.length == []) {
+                break
+            }
+            CardProductos.innerHTML = "";
+            produc.forEach(function (producto) {
+                if (producto.recomendado == "1") {
+                    var cadena = `<div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="row">
@@ -190,12 +192,12 @@ function Leerproductos(elem) {
                                             </div>
                                         </div>
                                     </div>`;
-                                    CardProductos.innerHTML += cadena;
-                    }
-                });
-                break
+                    CardProductos.innerHTML += cadena;
+                }
+            });
+            break
 
-        }
+    }
 }
 
 function EditarProducto(id) {
@@ -231,21 +233,18 @@ function EliminarProducto(id) {
     Leerproductos('table');
 }
 
-  //Función mostrar formulario
-function mostrarform(flag)
-{
-	limpiar();
-	if (flag)
-	{
-		$("#listadoregistros").hide();
-		$("#formularioregistros").show();
-		$("#btnGuardar").prop("disabled",false);
-		$("#btnagregar").hide();
-	}
-	else
-	{
-		$("#listadoregistros").show();
-		$("#formularioregistros").hide();
-		$("#btnagregar").show();
-	}
+//Función mostrar formulario
+function mostrarform(flag) {
+    limpiar();
+    if (flag) {
+        $("#listadoregistros").hide();
+        $("#formularioregistros").show();
+        $("#btnGuardar").prop("disabled", false);
+        $("#btnagregar").hide();
+    }
+    else {
+        $("#listadoregistros").show();
+        $("#formularioregistros").hide();
+        $("#btnagregar").show();
+    }
 }

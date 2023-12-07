@@ -16,10 +16,13 @@ function Sesionusu(elem) {
 function guardarusuario() {
     let id = document.getElementById("idusuario").value;
     let nombre = document.getElementById("nomusuario").value;
-    let usuario = document.getElementById("usuario").value;
+    let usuario = document.getElementById("puser").value;
     let contrasena = document.getElementById("webcontrasena").value;
-    let email = document.getElementById("email").value;
+    let email = document.getElementById("pemail").value;
     let telefono = document.getElementById("telefono").value;
+
+    consol.log(document.getElementById("puser"))
+    alert(usuario)
 
     if (id || nombre || usuario || contrasena || email || telefono) {
         alert("Favor de llenar todos los campos");
