@@ -1,7 +1,5 @@
 window.addEventListener("load", function () { CargarContenido('vistas/inicio.html', 'contenido', 'inicio') });
 
-var idsesion = true
-
 function CargarContenido(url, div, from) {
     var getUrl = window.location;
     var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + url;
@@ -20,13 +18,15 @@ function CargarContenido(url, div, from) {
             var contenido = document.getElementById(div);
             contenido.innerHTML = html;
             ejecutarScriptsEnContenido(contenido);
+            
+            Sesionusu();
 
             switch (from) {
                 case "productos":
                     Leerproductos('table');
                     break
                 case "login":
-                    Sesionusu(idsesion);
+                    logusu(sesion.id);
                     break
                 case "inicio":
                     Leerproductos('card2');

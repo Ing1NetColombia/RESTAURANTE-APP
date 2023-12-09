@@ -1,73 +1,81 @@
-<!DOCTYPE html>
-<html lang="es">
+<div>
+    <ul>
+        <!-- User image -->
+        <li class="user-header">
+            <img src="files/usuarios/user.png" class="rounded-circle" alt="User Image" id="imglog"
+                 style="margin: 6px 47px 20px 10px; max-width: 200px; border-color: #222d32; border-style: dashed solid; border-radius: 50%; ">
+            <p>
+                <small style="color: black; margin: 15px;" id="txt_email"></small>
+            </p>
+        </li>
+    </ul>
+</div>
 
 <div id="loguser">
     <!-- User image -->
-    <li class="user-header">
-        <img src="files/usuarios/user.png" class="rounded-circle" alt="User Image"
-            style=" margin: 15px; max-width: 300px; border-color: #222d32; border-style: dashed solid; border-radius: 50%;">
-        <p>
-            <small style="color: black; margin: 15px;">correo@correo</small>
-        </p>
-    </li>
+    <ul>
+        <!-- Menu Footer-->
+        <li class="user-footer" style="background-color: #222d32;">
 
-    <!-- Menu Footer-->
-    <li class="user-footer" style="background-color: #222d32;">
-
-        <div class="text-end">
-            <button href="#" class="btn btn-default btn-flat"
-                style="border-radius: 14px; background-color:#f2f2f2; margin: 15px;">Cerrar Sesion</button>
-        </div>
-    </li>
+            <div class="text-end">
+                <button href="#" class="btn btn-default btn-flat"
+                        style="border-radius: 14px; background-color:#f2f2f2; margin: 15px;">
+                    Cerrar Sesion
+                </button>
+            </div>
+        </li>
+    </ul>  
 </div>
 
 <div id="iniuser" style="max-width: 330px;">
-    <!-- User image -->
-    <li class="user-header">
-        <img src="files/usuarios/user.png" class="rounded-circle" alt="User Image"
-            style=" margin: 15px; max-width: 300px; border-color: #222d32; border-style: dashed solid; border-radius: 50%;">
-    </li>
 
-    <!-- Menu Footer-->
-    <li class="user-footer" style="background-color: #222d32;" id="login">
-        <input type="text" id="logina" class="form-control" placeholder="Usuario"
-            style="max-width: 300px; margin: 15px;">
-        <input type="password" id="clavea" class="form-control" placeholder="Contraseña"
-            style="max-width: 300px; margin: 15px;">
+    <ul>
+        <!-- Menu Footer-->
+        <li class="user-footer" style="background-color: #222d32;" id="login">
+            <input type="text" id="logina" class="form-control" placeholder="Usuario" style="max-width: 260px; margin: 15px;">
+            <input type="password" id="clavea" class="form-control" placeholder="Contraseña" style="max-width: 260px; margin: 15px;">
+        </li>
+        <li class="user-footer" style="background-color: #222d32;">
 
-    <li class="user-footer" style="background-color: #222d32;">
+            <div class="text-end">
+                <button href="#" class="btn btn-default btn-flat"
+                        style="border-radius: 14px; background-color:#f2f2f2; margin: 15px;" onclick="iniciarSesion()">
+                    Iniciar Sesion
+                </button>
+                <button href="#" class="btn btn-default btn-flat"
+                        style="border-radius: 14px; background-color:#f2f2f2; margin: 15px;"
+                        onclick="CargarContenido('vistas/usuario.html','contenido')">
+                    Registrar
+                </button>
+            </div>
+            <!-- Remind Passowrd -->
+            <div class="text-end">
+                <a class="underlineHover" style="margin: 15px;" onclick="mostrarform(true)">Olvido la contraseña?</a>
+            </div>
+        </li>
+        <li class="user-footer" style="background-color: #222d32;" id="claveuser">
+            <input type="text" id="rusuario" class="form-control" placeholder="Usuario"
+                   style="max-width: 90%; margin: 15px;">
+            <input type="text" id="remail" class="form-control" placeholder="Correo electronico"
+                   style="max-width: 90%; margin: 15px;">
 
-        <div class="text-end">
-            <button href="#" class="btn btn-default btn-flat"
-                style="border-radius: 14px; background-color:#f2f2f2; margin: 15px;" onclick="iniciarSesion()">Iniciar
-                Sesion</button>
-            <button href="#" class="btn btn-default btn-flat"
-                style="border-radius: 14px; background-color:#f2f2f2; margin: 15px;"
-                onclick="CargarContenido('vistas/usuario.html','contenido')">Registrar</button>
-        </div>
-        <!-- Remind Passowrd -->
-        <div class="text-end">
-            <a class="underlineHover" style="margin: 15px;" onclick="mostrarform(true)">Olvido la contraseña?</a>
-        </div>
-    </li>
-
-
-    </li>
-    <li class="user-footer" style="background-color: #222d32;" id="claveuser">
-        <input type="text" id="rusuario" class="form-control" placeholder="Usuario"
-            style="max-width: 90%; margin: 15px;">
-        <input type="text" id="remail" class="form-control" placeholder="Correo electronico"
-            style="max-width: 90%; margin: 15px;">
-
-        <div class="text-end">
-            <button href="#" class="btn btn-default btn-flat"
-                style="border-radius: 14px; background-color:#f2f2f2; margin: 15px;"
-                onclick="Sesionusu(true)">Validar</button>
-            <button href="#" class="btn btn-default btn-flat"
-                style="border-radius: 14px; background-color:#f2f2f2; margin: 15px;">cancelar</button>
-        </div>
-    </li>
+            <div class="text-end">
+                <button href="#" class="btn btn-default btn-flat"
+                        style="border-radius: 14px; background-color:#f2f2f2; margin: 15px;"
+                        onclick="Sesionusu(true)">
+                    Validar
+                </button>
+                <button href="#" class="btn btn-default btn-flat"
+                        style="border-radius: 14px; background-color:#f2f2f2; margin: 15px;">
+                    cancelar
+                </button>
+            </div>
+        </li>
+    </ul>
+    
 </div>
-<script src="js/script.js"></script>
+<script src="js/script.js">
 
-</html>
+
+</script>
+

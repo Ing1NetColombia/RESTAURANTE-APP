@@ -1,8 +1,36 @@
-function Sesionusu(elem) {
+function Sesionusu() {
     var sesion = JSON.parse(localStorage.getItem("sesion")) || [];
-    if (sesion.length == []){
+    imglog = sesion.imguser
+    txtuser = sesion.usuario
+    txtemail = sesion.email
 
+    if (sesion.length == []){
+        let sesion= { "idusuario":null, "usuario":null, "email":null, "telefono":null, "imguser":null, "rol":null }
+        localStorage.setItem("sesion", JSON.stringify(sesion));
     }
+
+    if(!sesion.id){
+        imglog = "files/usuarios/user.png"
+        txtuser = "Iniciar Sesion"
+        txtemail = ""
+    }
+
+    objuser = document.getElementById("txt_user");
+
+    if (objuser.parentNode) {
+        objuser.parentNode.removeChild(objuser);
+    }
+    var text = document.createTextNode(txtuser);
+    objuser.appendChild(text);
+
+    var text = document.createTextNode(txtemail);
+    document.getElementById("txt_email").appendChild(text);
+
+    const imgElement = document.getElementById('imglog'); 
+    imgElement.src = imglog;
+}
+
+function logusu(elem){
     setTimeout(() => {
         if (elem) {
             document.getElementById("iniuser").style.display = 'block';
@@ -14,7 +42,6 @@ function Sesionusu(elem) {
             document.getElementById("claveuser").style.display = 'none';
         }
     }, 100);
-
 }
 
 function guardarusuario() {
