@@ -225,5 +225,5 @@ function CerrarSesion() {
         icon: "success"
     });
     // alert("ingresando")
-    window.location.reload();
+    window.location.reload(true);
 }

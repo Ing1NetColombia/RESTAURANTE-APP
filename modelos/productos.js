@@ -180,13 +180,13 @@ function Leerproductos(elem) {
             CardProductos.innerHTML = "";
             produc.forEach(function (producto) {
                 if (producto.recomendado == "1") {
-                    let imgproduc = producto.imgproduc || 'files/img/no img.png'
+                    let imgproduc = producto.imgproduc || 'files/img/no img.png';
                     var cadena = `<div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                                        <img src="${imgproduc} " class="rounded-circle" style="max-width: 170px;" alt="Item Image">
+                                                        <img src="${imgproduc}" class="rounded-circle" style="max-width: 170px;" alt="Item Image">
                                                     </div>
                                                     <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                                         <h3 class="card-title">${producto.nomproducto}</h3>
