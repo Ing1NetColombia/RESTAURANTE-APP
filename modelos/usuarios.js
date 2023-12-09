@@ -1,17 +1,16 @@
 var sesion = []; // se sion de usuario
 
 function Sesionusu() {
-
+    sesion = JSON.parse(localStorage.getItem("sesion")) || [];
     var imglog = sesion.imguser;
     var txtuser = sesion.usuario;
-
-    sesion = JSON.parse(localStorage.getItem("sesion")) || [];
+    
     if (Object.keys(sesion).length === 0){
         let sesion= { "idusuario":null, "usuario":null, "email":null, "telefono":null, "imguser":null, "rol":null }
         localStorage.setItem("sesion", JSON.stringify(sesion));
     }
 
-    if(!sesion.id){
+    if(!sesion.idusuario){
         var imglog = "files/usuarios/user.png";
         var txtuser = "Iniciar Sesion";
     }
@@ -59,7 +58,12 @@ function guardarusuario() {
     let telefono = document.getElementById("telefono").value;
 
     if (id == '' || nombre == '' || usuario == '' || contrasena == '' || email == '' || telefono == '') {
-        alert("Favor de llenar todos los campos");
+        Swal.fire({
+            title: "Error",
+            text: "Favor de llenar todos los campo.",
+            icon: "success"
+        });
+        //alert("Favor de llenar todos los campos");
         return;
     }
 
@@ -71,7 +75,12 @@ function guardarusuario() {
     });
 
     if (a_usuario.length > 0) {
-        alert("Usuario ya existe");
+        Swal.fire({
+            title: "Error",
+            text: "Usuario ya existe.",
+            icon: "success"
+        });
+        //alert("Usuario ya existe");
         return;
     }
 
@@ -79,7 +88,12 @@ function guardarusuario() {
     user.push(usuario_r);
 
     localStorage.setItem("user", JSON.stringify(user));
-    alert("Registro completo");
+    Swal.fire({
+        title: "Completo",
+        text: "Registro completo.",
+        icon: "success"
+    });
+    //alert("Registro completo");
 
 }
 
@@ -138,6 +152,12 @@ function Eliminarusuario(id) {
 
     localStorage.setItem("user", JSON.stringify(usuariosFiltrados));
     Leerusuario();
+
+    Swal.fire({
+        title: "Compleado",
+        text: "Producto ha sido eliminado.",
+        icon: "success"
+    });
 }
 
 function iniciarSesion() {
@@ -161,25 +181,49 @@ function iniciarSesion() {
     }
   
     if (!userLog) {
-      alert("Usuario no encontrado");
-      return;
+        Swal.fire({
+            title: "Error",
+            text: "Usuario no encontrado.",
+            icon: "success"
+        });
+        //alert("Usuario no encontrado");
+        return;
     }
   
     if (userLog["webcontrasena"] !== contra) {
-      alert("Contraseña incorrecta");
-      return;
+        Swal.fire({
+            title: "Error",
+            text: "Contraseña incorrecta.",
+            icon: "success"
+        });
+        //alert("Contraseña incorrecta");
+        return;
     }
   
     localStorage.setItem("sesion", JSON.stringify(userLog));
+
+    Sesionusu()
   
-    console.log("Antes de la redirección");
-  
-    // var local = window.location.href
-    
-    // Cambiar la ubicación (URL) a "login_2.html"
-    window.location.href = "../index.html";
+    Swal.fire({
+        title: "Completado",
+        text: "Sesion Iniciada correrctamente.",
+        icon: "success"
+    });
     // alert("ingresando")
+    window.location.reload();
+}
+
+function CerrarSesion() {
   
-    // Este mensaje puede no mostrarse inmediatamente debido a la redirección
-    // console.log("Después de la redirección");
-  }
+    localStorage.removeItem("sesion");
+
+    Sesionusu()
+
+    Swal.fire({
+        title: "Compleado",
+        text: "Sesion Finalizada.",
+        icon: "success"
+    });
+    // alert("ingresando")
+    window.location.reload();
+}

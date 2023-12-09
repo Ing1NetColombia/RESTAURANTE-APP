@@ -1,7 +1,7 @@
 <div class="row">
     <!-- User image -->
     <div class="col-md-12 user-header">
-        <img src="" class="rounded-circle img-fluid" alt="User Image" id="imglog2" style="max-width: 250px; border-color: gray; border-style: dashed solid; border-radius: 50%;">
+        <img src="files/usuarios/user.png" class="rounded-circle img-fluid" alt="User Image" id="imglog2" style="max-width: 250px; border-color: gray; border-style: dashed solid; border-radius: 50%;">
         <p>
             <small style="color: black; margin: 15px;" id="txt_email"></small>
         </p>
@@ -9,9 +9,9 @@
 
     <div class="row" id="loguser">
         <!-- User options -->
-        <div class="col-md-12 user-footer" style="background-color: #ffffff;">
+        <div class="user-footer">
             <div class="text-end">
-                <button href="#" class="btn btn-default btn-flat btn-sm" style="border-radius: 14px; background-color:#f2f2f2; margin: 15px;">
+                <button href="#" class="btn btn-default btn-flat btn-sm" style="border-radius: 14px; background-color:#f2f2f2;" onclick="CerrarSesion()">
                     Cerrar Sesión
                 </button>
             </div>
@@ -43,13 +43,13 @@
             <!-- User validation form -->
             <div id="claveuser" style="max-width: 90%; margin: 15px; display: none;">
                 <input type="text" id="rusuario" class="form-control" placeholder="Usuario">
-                <input type="text" id="remail" class="form-control" placeholder="Correo electronico" style="margin-top: 10px;">
+                <input type="text" id="remail" class="form-control" placeholder="Correo electronico">
 
                 <div class="text-end" style="margin-top: 10px;">
                     <button href="#" class="btn btn-default btn-flat" style="border-radius: 14px; background-color:#f2f2f2;" onclick="Sesionusu(true)">
                         Validar
                     </button>
-                    <button href="#" class="btn btn-default btn-flat" style="border-radius: 14px; background-color:#f2f2f2; margin-left: 10px;" onclick="CancelarValidacion()">
+                    <button href="#" class="btn btn-default btn-flat" style="border-radius: 14px; background-color:#f2f2f2;" onclick="CancelarValidacion()">
                         Cancelar
                     </button>
                 </div>
