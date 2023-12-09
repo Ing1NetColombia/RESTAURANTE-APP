@@ -1,81 +1,61 @@
-<div>
-    <ul>
-        <!-- User image -->
-        <li class="user-header">
-            <img src="files/usuarios/user.png" class="rounded-circle" alt="User Image" id="imglog"
-                 style="margin: 6px 47px 20px 10px; max-width: 200px; border-color: #222d32; border-style: dashed solid; border-radius: 50%; ">
-            <p>
-                <small style="color: black; margin: 15px;" id="txt_email"></small>
-            </p>
-        </li>
-    </ul>
-</div>
-
-<div id="loguser">
+<div class="row">
     <!-- User image -->
-    <ul>
-        <!-- Menu Footer-->
-        <li class="user-footer" style="background-color: #222d32;">
+    <div class="col-md-12 user-header">
+        <img src="" class="rounded-circle img-fluid" alt="User Image" id="imglog2" style="max-width: 250px; border-color: gray; border-style: dashed solid; border-radius: 50%;">
+        <p>
+            <small style="color: black; margin: 15px;" id="txt_email"></small>
+        </p>
+    </div>
 
+    <div class="row" id="loguser">
+        <!-- User options -->
+        <div class="col-md-12 user-footer" style="background-color: #ffffff;">
             <div class="text-end">
-                <button href="#" class="btn btn-default btn-flat"
-                        style="border-radius: 14px; background-color:#f2f2f2; margin: 15px;">
-                    Cerrar Sesion
+                <button href="#" class="btn btn-default btn-flat btn-sm" style="border-radius: 14px; background-color:#f2f2f2; margin: 15px;">
+                    Cerrar Sesión
                 </button>
             </div>
-        </li>
-    </ul>  
-</div>
+        </div>
+    </div>
 
-<div id="iniuser" style="max-width: 330px;">
+    <div class="row" id="iniuser">
+        <!-- User login form -->
+        <div>
+            <div class="form-group">
+                <input type="text" id="logina" class="form-control" style="margin: 5px;" placeholder="Usuario" >
+                <input type="password" id="clavea" class="form-control" style="margin: 5px;" placeholder="Contraseña" >
 
-    <ul>
-        <!-- Menu Footer-->
-        <li class="user-footer" style="background-color: #222d32;" id="login">
-            <input type="text" id="logina" class="form-control" placeholder="Usuario" style="max-width: 260px; margin: 15px;">
-            <input type="password" id="clavea" class="form-control" placeholder="Contraseña" style="max-width: 260px; margin: 15px;">
-        </li>
-        <li class="user-footer" style="background-color: #222d32;">
+                <div class="text-end">
+                    <button href="#" class="btn btn-default btn-flat" style="border-radius: 14px; background-color:#f2f2f2;" onclick="iniciarSesion()">
+                        Iniciar Sesion
+                    </button>
+                    <button href="#" class="btn btn-default btn-flat" style="border-radius: 14px; background-color:#f2f2f2;" onclick="CargarContenido('vistas/usuario.html','contenido')">
+                        Registrar
+                    </button>
+                </div>
+            </div>            
 
-            <div class="text-end">
-                <button href="#" class="btn btn-default btn-flat"
-                        style="border-radius: 14px; background-color:#f2f2f2; margin: 15px;" onclick="iniciarSesion()">
-                    Iniciar Sesion
-                </button>
-                <button href="#" class="btn btn-default btn-flat"
-                        style="border-radius: 14px; background-color:#f2f2f2; margin: 15px;"
-                        onclick="CargarContenido('vistas/usuario.html','contenido')">
-                    Registrar
-                </button>
-            </div>
-            <!-- Remind Passowrd -->
+            <!-- Remind Password -->
             <div class="text-end">
                 <a class="underlineHover" style="margin: 15px;" onclick="mostrarform(true)">Olvido la contraseña?</a>
             </div>
-        </li>
-        <li class="user-footer" style="background-color: #222d32;" id="claveuser">
-            <input type="text" id="rusuario" class="form-control" placeholder="Usuario"
-                   style="max-width: 90%; margin: 15px;">
-            <input type="text" id="remail" class="form-control" placeholder="Correo electronico"
-                   style="max-width: 90%; margin: 15px;">
 
-            <div class="text-end">
-                <button href="#" class="btn btn-default btn-flat"
-                        style="border-radius: 14px; background-color:#f2f2f2; margin: 15px;"
-                        onclick="Sesionusu(true)">
-                    Validar
-                </button>
-                <button href="#" class="btn btn-default btn-flat"
-                        style="border-radius: 14px; background-color:#f2f2f2; margin: 15px;">
-                    cancelar
-                </button>
+            <!-- User validation form -->
+            <div id="claveuser" style="max-width: 90%; margin: 15px; display: none;">
+                <input type="text" id="rusuario" class="form-control" placeholder="Usuario">
+                <input type="text" id="remail" class="form-control" placeholder="Correo electronico" style="margin-top: 10px;">
+
+                <div class="text-end" style="margin-top: 10px;">
+                    <button href="#" class="btn btn-default btn-flat" style="border-radius: 14px; background-color:#f2f2f2;" onclick="Sesionusu(true)">
+                        Validar
+                    </button>
+                    <button href="#" class="btn btn-default btn-flat" style="border-radius: 14px; background-color:#f2f2f2; margin-left: 10px;" onclick="CancelarValidacion()">
+                        Cancelar
+                    </button>
+                </div>
             </div>
-        </li>
-    </ul>
-    
+        </div>
+    </div>
 </div>
-<script src="js/script.js">
-
-
-</script>
+<script src="js/script.js"></script>
 

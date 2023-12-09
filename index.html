@@ -27,44 +27,40 @@
                     <h1><a onclick="CargarContenido('vistas/inicio.html','contenido','inicio')"> Restaurante Remy </a></h1>
                     <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
                         <div class="container-fluid">
-                        
-                        <!-- Navbar Toggler for Responsive Design -->
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
+                            <!-- Navbar Toggler for Responsive Design -->
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                    
+                            <!-- Navbar Right Menu -->
+                            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item"><a class="nav-link" href="#menu" onclick="CargarContenido('vistas/menu.html','contenido','menu')">Menú</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#reservas" onclick="CargarContenido('vistas/reservas.html','contenido')">Reservas</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#contacto" onclick="CargarContenido('vistas/contactos.html','contenido')">Contacto</a></li>
+                                </ul>
+                    
+                                <ul class="navbar-nav">
+                                    <li class="nav-item dropdown pull-right dropstart">
+                                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false" onclick="CargarContenido('vistas/login.html','login','login')">
+                                            <img src="" class="user-image" style="max-width: 30px; border-radius: 50%; border-style: dashed; list-style: 0.5px;" id="imglog" alt="User Image">
+                                            <span class="hidden-xs" style="text-transform: uppercase;" id="txt_user"></span> 
+                                            <span>
+                                                <i class="bi bi-box-arrow-left"></i>
+                                            </span>
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                                            <li>
+                                                <div id="login" class="col-md-12 m-2">
 
-                        <!-- Navbar Right Menu -->
-                        <div  class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav">
-                                <li class="nav-item"><a class="nav-link" href="#menu" onclick="CargarContenido('vistas/menu.html','contenido','menu')">Menú</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#reservas" onclick="CargarContenido('vistas/reservas.html','contenido')">Reservas</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#contacto" onclick="CargarContenido('vistas/contactos.html','contenido')">Contacto</a></li>
-                                <!-- User Account: style can be found in dropdown.less -->
-                            </ul>
-                        </div>
-
-                        <div class="collapse navbar-collapse justify-content-end dropstart" id="navbarNav">
-                            <ul class="navbar-nav" >
-                                <li class="nav-item dropdown pull-right" >
-                                    
-                                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="CargarContenido('vistas/login.html','login','login')">
-                                        <img src="files/usuarios/user.png" class="user-image" style="max-width: 30px; border-radius: 50%; border-style: dashed; list-style: 0.5px;" alt="User Image">
-                                        <span class="hidden-xs" style="text-transform: uppercase;" id="txt_user"></span> 
-                                        <span >
-                                            <i class="bi bi-box-arrow-left"></i>
-                                        </span>
-                                    </a>
-                                    
-                                    <ul class="dropdown-menu" aria-labelledby="userDropdown" >
-                                        <li>
-                                            <div id="login" class="col-md-12">
-
-                                            </div>
-                                        </li>                                        
-                                    </ul>
-                                </li>
-                            </ul>  
-                        </div>
+                                                </div>
+                                            </li>                                        
+                                        </ul>
+                                    </li>
+                                </ul>  
+                            </div>
                         </div>
                     </nav>
                 </header>

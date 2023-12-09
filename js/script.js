@@ -26,7 +26,7 @@ function CargarContenido(url, div, from) {
                     Leerproductos('table');
                     break
                 case "login":
-                    logusu(sesion.id);
+                    logusu(sesion.idusuario);
                     break
                 case "inicio":
                     Leerproductos('card2');

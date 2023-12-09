@@ -1,46 +1,52 @@
-function Sesionusu() {
-    var sesion = JSON.parse(localStorage.getItem("sesion")) || [];
-    imglog = sesion.imguser
-    txtuser = sesion.usuario
-    txtemail = sesion.email
+var sesion = []; // se sion de usuario
 
-    if (sesion.length == []){
+function Sesionusu() {
+
+    var imglog = sesion.imguser;
+    var txtuser = sesion.usuario;
+
+    sesion = JSON.parse(localStorage.getItem("sesion")) || [];
+    if (Object.keys(sesion).length === 0){
         let sesion= { "idusuario":null, "usuario":null, "email":null, "telefono":null, "imguser":null, "rol":null }
         localStorage.setItem("sesion", JSON.stringify(sesion));
     }
 
     if(!sesion.id){
-        imglog = "files/usuarios/user.png"
-        txtuser = "Iniciar Sesion"
-        txtemail = ""
+        var imglog = "files/usuarios/user.png";
+        var txtuser = "Iniciar Sesion";
     }
 
-    objuser = document.getElementById("txt_user");
-
-    if (objuser.parentNode) {
-        objuser.parentNode.removeChild(objuser);
-    }
+    /*const objuser = document.getElementById("txt_user")
     var text = document.createTextNode(txtuser);
-    objuser.appendChild(text);
+    objuser.appendChild(text);*/
 
-    var text = document.createTextNode(txtemail);
-    document.getElementById("txt_email").appendChild(text);
+    document.getElementById("txt_user").textContent = txtuser;
 
     const imgElement = document.getElementById('imglog'); 
     imgElement.src = imglog;
+
 }
 
 function logusu(elem){
     setTimeout(() => {
         if (elem) {
-            document.getElementById("iniuser").style.display = 'block';
-            document.getElementById("loguser").style.display = 'none';
-            document.getElementById("claveuser").style.display = 'none';
-        } else {
+            var imglog = sesion.imguser;
+            var txtemail = sesion.email;
             document.getElementById("loguser").style.display = 'block';
             document.getElementById("iniuser").style.display = 'none';
             document.getElementById("claveuser").style.display = 'none';
+        } else {
+            var imglog = "files/usuarios/user.png";
+            var txtemail = "";
+            document.getElementById("iniuser").style.display = 'block';
+            document.getElementById("loguser").style.display = 'none';
+            document.getElementById("claveuser").style.display = 'none';
         }
+        
+        document.getElementById("txt_email").textContent = txtemail;
+        const imgElement = document.getElementById('imglog2'); 
+        imgElement.src = imglog;
+    
     }, 100);
 }
 
@@ -143,7 +149,7 @@ function iniciarSesion() {
   
     if (users.length > 0) {
       users.forEach(function(usuarios_f) {
-        var nombreUsuario = usuarios_f["usuario_init"];
+        var nombreUsuario = usuarios_f["usuario"];
         
         if (nombreUsuario === usuario) {
           userLog = usuarios_f;
@@ -159,12 +165,12 @@ function iniciarSesion() {
       return;
     }
   
-    if (userLog["contra_init"] !== contra) {
+    if (userLog["webcontrasena"] !== contra) {
       alert("Contraseña incorrecta");
       return;
     }
   
-    localStorage.setItem("usuarioActual", JSON.stringify(userLog));
+    localStorage.setItem("sesion", JSON.stringify(userLog));
   
     console.log("Antes de la redirección");
   
