@@ -16,7 +16,7 @@ function guardarrestaurante() {
     }
 
     var imgplano = localStorage.getItem("objImage") || [];
-    var restaurant = JSON.parse(localStorage.getItem("restaurante")) || [];
+    //var restaurant = JSON.parse(localStorage.getItem("restaurante")) || [];
 
     let restaurant = {
         "idrestaurante": id, "nomrestaurante": nombre, "direccion": direccion,
@@ -35,20 +35,20 @@ function guardarrestaurante() {
 
 }
 
-function EditarRestaurante(id) {
+function EditarRestaurante() {
     var restaurant = JSON.parse(localStorage.getItem("restaurante")) || [];
 
     var objid = document.getElementById("idrestaurante");
     var objnombre = document.getElementById("nomrestaurante");
     var objdireccion = document.getElementById("direccion");
     var objcontacto = document.getElementById("contacto");
-    var objimgplano = document.getElementById("imgplano");
+    //var objimgplano = document.getElementById("imgplano");
 
-    objid.value = producto.idproducto;
-    objnombre.value = producto.nomproducto;
-    objdireccion.value = producto.descripcion;
-    objcontacto.value = producto.contacto;
-    objimgplano.value = producto.imgplano;
+    objid.value = restaurant.idrestaurante;
+    objnombre.value = restaurant.nomrestaurante;
+    objdireccion.value = restaurant.direccion;
+    objcontacto.value = restaurant.contacto;
+    //objimgplano.value = restaurant.imgplano;
 }
 
 //Función mostrar formulario

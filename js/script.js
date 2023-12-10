@@ -34,6 +34,12 @@ function CargarContenido(url, div, from) {
                 case "menu":
                     Leerproductos('card');
                     break
+                case "restaurante":
+                    EditarRestaurante();
+                    break
+                case "categoria":
+                    Leercategoria('table');
+                    break
             }
 
         })
