@@ -7,8 +7,8 @@
         {
             "type": "msedge",
             "request": "launch",
-            "name": "Launch Chrome against localhost",
-            "url": "http://localhost:88/RESTAURANTE-APP",
+            "name": "Launch Edge against localhost",
+            "url": "http://localhost:88/restaurante-app",
             "webRoot": "${workspaceFolder}"
         }
     ]

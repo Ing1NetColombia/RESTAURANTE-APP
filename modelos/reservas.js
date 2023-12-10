@@ -1,4 +1,4 @@
-function reservarLibro(){
+function reservas(){
   let name_book1 = document.getElementById("name-book");
   let name_book = name_book1.innerText;
   let autor1 = document.getElementById("book-author");

@@ -1,0 +1,89 @@
+<div class="container-fluid">
+    <!-- Main content -->
+    <section class="content">
+        <div>
+            <div>
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title" id="titusuario">Restaurante <button class="btn btn-success"
+                                style='margin-left: 10px;' id="btnagregar" onclick="mostrarform(true)"><i
+                                    class="fa fa-plus-circle"></i> Agregar</button>
+                            <h1><div class="box-tools pull-right"></div></h1>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- centro -->
+
+                    <div class="card-body" style="height: auto;" id="formularioregistros">
+                        <div class="card-header">
+                            <form name="formulario" id="formulario">
+                                <div class="row">
+
+                                    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <label>codigo(*):</label>
+                                        <input type="text" class="form-control" id="idrestaurante" maxlength="80"
+                                            placeholder="Codigo">
+                                    </div>
+
+                                    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <label>Nombre(*):</label>
+                                        <input type="text" class="form-control" id="nomrestaurante" maxlength="45"
+                                            placeholder="descripcion">
+                                    </div>      
+                                    
+                                    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <label>Direccion(*):</label>
+                                        <input type="text" class="form-control" id="direccion" maxlength="80"
+                                               placeholder="Correo Electronico">
+                                    </div>
+            
+                                    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <label>Contacto(*):</label>
+                                        <input type="number" class="form-control" id="contacto" maxlength="45" placeholder="Telefono">
+                                    </div>
+            
+                                    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <label for='imgplano'>Plano</label>
+                                        <input id='imgplano' type='file' accept='image/*' class="form-control" maxlength="45">
+                                    </div>
+            
+                                    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <img src="files/img/no img.png" id="imgprev" style="max-width: 170px; margin: 10px;"
+                                             alt="Item Image">
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <button class="btn btn-primary" onclick="guardarcategoria()">Guardar</button>
+                                    <button class="btn btn-danger" onclick="cancelarform()" type="button">Cancelar</button>
+                                </div>
+                            </form>
+                        </div>
+                        <!--Fin centro -->
+                    </div><!-- /.box -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+    </section><!-- /.content -->
+</div>
+
+<script>
+    localStorage.removeItem("objImage");
+
+    // Ejemplo de uso en un input de tipo file
+    const input = document.getElementById('imgplano'); // Reemplaza 'tuInputDeArchivo' con el ID de tu input file
+    console.log(input)
+    input.addEventListener('change', function cargarImagen(elem) {
+        const file = this.files[0];
+
+        if (file) {
+            convertirImagenABase64(file, function (base64String) {
+                // Guardar la imagen en localStorage
+                localStorage.setItem('objImage', base64String);
+
+                const imgElement = document.getElementById('imgprev'); // Reemplaza 'tuElementoImg' con el ID de tu elemento <img>
+                imgElement.src = base64String;
+            });
+        }
+    });
+
+</script>
