@@ -1,11 +1,6 @@
 <div>
     <section id="menu" class="container-fluid">
-        <h2>Menú</h2>
-        <div class="text-end">
-            <button href="#" class="btn btn-default btn-flat"
-                style="border-radius: 14px; background-color:#f2f2f2; margin: 15px;"
-                onclick="CargarContenido('vistas/productos.html','contenido','productos')">agregar</button>
-        </div>
+        <h2>Menú <button class="btn btn-success" style='margin-left: 10px;' id="btnagregar" onclick="CargarContenido('vistas/productos.html','contenido','productos')">Agregar</button></h2>
 
         <div class="row" id="CardProductos">
             <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
@@ -28,3 +23,6 @@
         <!-- Agrega más platos aquí -->
     </section>
 </div>
+<script>
+    mostrarform('menu');
+</script>

@@ -1,59 +1,145 @@
-function reservas(){
-  let name_book1 = document.getElementById("name-book");
-  let name_book = name_book1.innerText;
-  let autor1 = document.getElementById("book-author");
-  let autor = autor1.innerText;
-  let editorial1 = document.getElementById("book-editorial");
-  let editorial = editorial1.innerText;
-  let fecha = new Date();
-  let fechaReserva = fecha.toISOString(); 
+function guardarreserva() {
+  let cedula = document.getElementById("cedula").value;
+  let telefono = document.getElementById("telefono").value;
+  let zona = document.getElementById("idzona").value;
+  let mesa = document.getElementById("idmesa").value;
+  let fecha = new Date(Date.now()).toISOString();
+  //let fechreserva = new Date(document.getElementById("fechreserva").value).toISOString;
+  let fechreserva = document.getElementById("fechreserva").value;
+  let id = cedula + mesa + Math.floor(Math.random() * max);
 
-
-  var reserva = JSON.parse(localStorage.getItem("reserva")) || [];
-     
-  alert(name_book)
-
-  var ReservaLog = reserva.filter(function(reserva_l){
-      return (reserva_l["name-book"] == name_book);
-  });
-
-  if(ReservaLog.length > 0){
-      alert("Usuario ya existe");
+  if (cedula == '' || telefono == '' || zona == '' || mesa == '' || fechreserva == '') {
+      Swal.fire({
+          title: "Error",
+          text: "Favor de llenar todos los campos.",
+          icon: "warning"
+      });
+      //alert("Favor de llenar todos los campos");
       return;
   }
-  let ReservaL = { "name-book" : name_book,"book-author":autor, "book-editorial":editorial,"fecha_reserva" :fechaReserva }
-  reserva.push(ReservaL);
 
-  alert(JSON.stringify(ReservaL));  
-  localStorage.setItem("reserva", JSON.stringify(reserva));
-  alert("Registro completo");
-  //document.getElementById("formRegistro").reset();
+  var reserv = JSON.parse(localStorage.getItem("reservas")) || [];
+
+  reserv.forEach(function (reserv) {
+    if (reserv.cedula == cedula && reserv.mesa == mesa) {
+      Swal.fire({
+          title: "Error",
+          text: "Ya tiene reservada la mesa.",
+          icon: "warning"
+      });
+      return;
+  }
+  });
+  /*var a_reserv = reserv.filter(function (reserv_f) {
+      return (reserv_f.idmesas == id);
+  });*/
+
+  let reserv_r = {
+      "idreserva": id, "cedula": cedula, "telefono": telefono,"idzona": zona, "idmesa": mesa, "fecha": fecha, "fechreserva": fechreserva
+  }
+  reserv.push(reserv_r);
+
+  localStorage.setItem("mesas", JSON.stringify(reserv));
+
+  Swal.fire({
+      title: "Completo",
+      text: "Registro completo.",
+      icon: "success"
+  });
+  //alert("Registro completo");
+
 }
 
-// Función para cargar dinámicamente el historial en la tabla
-function cargarHistorial() {
-  var tablaBody = document.getElementById("historialTablaBody");
-  var datosGuardados = JSON.parse(localStorage.getItem("reserva"));
+function Leerreserva(elem) {
+  var reserv = JSON.parse(localStorage.getItem("reservas")) || [];
 
-  datosGuardados.forEach(element => {
-    var fila = document.createElement("tr");
+  switch (elem,sesion.rol) {
+      case 'table','admin':
+          var tblreservas = document.getElementById("tblreservas");
 
-    var celdaLibro = document.createElement("td");
-    celdaLibro.textContent = element["name-book"];
-    fila.appendChild(celdaLibro);
+          tblreservas.innerHTML = "";
+          reserv.forEach(function (reserv) {
+              var cadena = `<tr>
+                                  <td>
+                                      <button class="btn btn-primary" onclick="EditarReserva(${reserv.idreserva})">
+                                          Editar 
+                                      </button>
+                                      
+                                      <button class="btn btn-warning" onclick="EliminarReserva(${reserv.idreserva})">
+                                          Eliminar 
+                                      </button>
+                                  </td>
+                                  <td>${reserv.idreserva}</td>
+                                  <td>${reserv.cedula}</td>
+                                  <td>${reserv.idzona}</td>
+                                  <td>${reserv.idmesas}</td> 
+                                  <td>${reserv.fecha}</td>
+                                  <td>${reserv.fechreserva}</td>
+                              </tr>`;
+              tblreservas.innerHTML += cadena;
+          });
+          break
+        case 'table',!'admin':
+          var tblreservas = document.getElementById("tblreservas");
 
-    var celdaAutor = document.createElement("td");
-    celdaAutor.textContent = element["book-author"];  // Corregido el nombre de la variable
-    fila.appendChild(celdaAutor);
+          tblreservas.innerHTML = "";
+          reserv.forEach(function (reserv) {
+              if(sesion.id = reserv.cedula){
+              var cadena = `<tr>
+                                  <td>
+                                      <button class="btn btn-primary" onclick="EditarReserva(${reserv.idreserva})">
+                                          Editar 
+                                      </button>
+                                      
+                                      <button class="btn btn-warning" onclick="EliminarReserva(${reserv.idreserva})">
+                                          Eliminar 
+                                      </button>
+                                  </td>
+                                  <td>${reserv.idreserva}</td>
+                                  <td>${reserv.cedula}</td>
+                                  <td>${reserv.idzona}</td>
+                                  <td>${reserv.idmesas}</td> 
+                                  <td>${reserv.fecha}</td>
+                                  <td>${reserv.fechreserva}</td>
+                              </tr>`;
+              tblreservas.innerHTML += cadena;
+              }
+          });
+          break
 
-    var celdaEditorial = document.createElement("td");
-    celdaEditorial.textContent = element["book-editorial"];  // Corregido el nombre de la variable
-    fila.appendChild(celdaEditorial);
 
-    var celdaFecha = document.createElement("td");
-    celdaFecha.textContent = element["fecha_reserva"];
-    fila.appendChild(celdaFecha);
+  }
+}
 
-    tablaBody.appendChild(fila);
+function EditarReserva(id) {
+  var reserv = JSON.parse(localStorage.getItem("reservas")) || [];
+
+  var reservas = reserv.find(function (reservas) {
+      return reservas.idreserva == id;
   });
+
+  var objcadula = document.getElementById("cedula");
+  var objtelefono = document.getElementById("telefono");
+  var objzona = document.getElementById("idzona");
+  var objmesa = document.getElementById("idmesa");
+  var objfecha = document.getElementById("fechreserva");
+
+  objcadula.value = reservas.cedula;
+  objtelefono.value = reservas.telefono
+  objzona.value = reservas.idzona
+  objmesa.value = reservas.idmesa;
+  objfecha.value = reservas.fechreserva;
+  
+  mostrarform('reservas',false)
+}
+
+function EliminarMesa(id) {
+  var reserv = JSON.parse(localStorage.getItem("reservas")) || [];
+
+  var reservFiltrados = reserv.filter(function (reservas) {
+      return reservas.idreserva != id;
+  });
+
+  localStorage.setItem("reservas", JSON.stringify(reservFiltrados));
+  Leerproductos('table');
 }

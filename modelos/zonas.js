@@ -96,11 +96,13 @@ function EditarZona(id) {
 
     var objid = document.getElementById("idzona");
     var objdescripcion = document.getElementById("descripcion");
-    var objestado = document.getElementById("estado");
+    //var objestado = document.getElementById("estado");
 
     objid.value = zonas.idzona;
     objdescripcion.value = zonas.descripcion
-    objestado.value = zonas.estado;
+    //objestado.value = zonas.estado;
+    
+    mostrarform('zonas',false)
 }
 
 function EliminarZona(id) {
@@ -112,20 +114,4 @@ function EliminarZona(id) {
 
     localStorage.setItem("zonas", JSON.stringify(zonasFiltrados));
     Leerzona('table');
-}
-
-//Función mostrar formulario
-function mostrarform(flag) {
-    limpiar();
-    if (flag) {
-        $("#listadoregistros").hide();
-        $("#formularioregistros").show();
-        $("#btnGuardar").prop("disabled", false);
-        $("#btnagregar").hide();
-    }
-    else {
-        $("#listadoregistros").show();
-        $("#formularioregistros").hide();
-        $("#btnagregar").show();
-    }
 }

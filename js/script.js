@@ -46,6 +46,12 @@ function CargarContenido(url, div, from) {
                 case "mesas":
                     Leermesa('table');
                     break
+                case "reservas":
+                    Leerreserva('table');
+                    break
+                case "usuario":
+                    LeerUsuario('table');
+                    break                
             }
 
         })
@@ -115,3 +121,59 @@ function convertirImagenABase64(inputFile, callback) {
     fileReader.readAsDataURL(inputFile);
 }
 
+//Función mostrar formulario
+function mostrarform(elem,cancel) {
+    
+    switch(elem){
+        case 'menu':
+            document.getElementById("btnagregar").style.display = sesion.rol == "admin" ? 'block':'none';
+        case "productos":
+            document.getElementById("listadoregistros").style.display = cancel? 'block':'none';
+            document.getElementById("formularioregistros").style.display = cancel? 'none':'block';
+            break
+        case "usuario":
+            document.getElementById("listadoregistros").style.display = sesion.rol == "admin"? 'block':'none';
+            document.getElementById("btnagregar").style.display = sesion.rol == "admin" ? 'block':'none';
+            break
+        case "categoria":
+            document.getElementById("listadoregistros").style.display = cancel? 'block':'none';
+            document.getElementById("formularioregistros").style.display = cancel? 'none':'block';
+            break
+        case "zonas":
+            document.getElementById("listadoregistros").style.display = cancel? 'block':'none';
+            document.getElementById("formularioregistros").style.display = cancel? 'none':'block';
+            break
+        case "mesas":
+            document.getElementById("listadoregistros").style.display = cancel? 'block':'none';
+            document.getElementById("formularioregistros").style.display = cancel? 'none':'block';
+            break
+        case "reservas":
+            document.getElementById("listadoregistros").style.display = cancel? 'block':'none';
+            document.getElementById("formularioregistros").style.display = cancel? 'none':'block';
+            document.getElementById("titsilog").style.display = sesion.idusuario? 'block':'none';
+            document.getElementById("titnolog").style.display = sesion.idusuario? 'none':'block';
+            
+            if(!cancel){
+                document.getElementById("cedula").value = sesion.idusuario;
+                document.getElementById("cedula").disabled="disabled";
+                document.getElementById("telefono").value = sesion.telefono;
+                document.getElementById("telefono").disabled="disabled";               
+                document.getElementById("imgprev").src = restaurante.plano;
+
+            }
+
+            break
+    }
+
+    /*if (flag) {
+        $("#listadoregistros").hide();
+        $("#formularioregistros").show();
+        $("#btnGuardar").prop("disabled", false);
+        $("#btnagregar").hide();
+    }
+    else {
+        $("#listadoregistros").show();
+        $("#formularioregistros").hide();
+        $("#btnagregar").show();
+    }*/
+}

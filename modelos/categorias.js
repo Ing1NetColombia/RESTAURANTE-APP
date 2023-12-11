@@ -97,11 +97,12 @@ function Editarcategotia(id) {
 
     var objid = document.getElementById("idcategoria");
     var objnombre = document.getElementById("nomcategoria");
-    var objestado = document.getElementById("estado");
+    //var objestado = document.getElementById("estado");
     
     objid.value = categoria.idcategoria;
     objnombre.value = categoria.nomcategoria;
-    objestado.value = categoria.estado;
+    //objestado.value = categoria.estado;
+    mostrarform('categoria',false)
 }
 
 function Eliminarcategoria(id) {
@@ -113,20 +114,4 @@ function Eliminarcategoria(id) {
 
     localStorage.setItem("Categorias", JSON.stringify(categoriaFiltrados));
     Leercategoria('table');
-}
-
-//Función mostrar formulario
-function mostrarform(flag) {
-    limpiar();
-    if (flag) {
-        $("#listadoregistros").hide();
-        $("#formularioregistros").show();
-        $("#btnGuardar").prop("disabled", false);
-        $("#btnagregar").hide();
-    }
-    else {
-        $("#listadoregistros").show();
-        $("#formularioregistros").hide();
-        $("#btnagregar").show();
-    }
 }

@@ -119,9 +119,15 @@ function LeerUsuario() {
         var cadena = `
             <tr>
                 <td>
-                    <button onclick="EditarUsuario(${usuario.idusuario})">Editar</button>
-                    <button onclick="Eliminarusuario(${usuario.idusuario})">Eliminar</button>
+                    <button class="btn btn-primary" onclick="EditarUsuario(${usuario.idusuario})">
+                        Editar 
+                    </button>
+                    
+                    <button class="btn btn-warning" onclick="Eliminarusuario(${usuario.idusuario})">
+                        Eliminar 
+                    </button>
                 </td>
+                <td>${usuario.idusuario}</td>
                 <td>${usuario.nomusuario}</td>
                 <td>${usuario.usuario}</td>
                 <td>${usuario.webcontrasena}</td>
@@ -146,6 +152,7 @@ function Editarusuario(id) {
     var objcontrasena = document.getElementById("webcontrasena");
     var objemail = document.getElementById("email");
     var objtelefono = document.getElementById("telefono");
+    var objimgprev = document.getElementById("imgprev");
 
     objid.value = usuario.idusuario;
     objnombre.value = usuario.nomusuario;
@@ -153,6 +160,7 @@ function Editarusuario(id) {
     objcontrasena.value = usuario.webcontrasena
     objemail.value = usuario.email
     objtelefono.value = usuario.telefono;
+    objimgprev.value = usuario.imguser;
 }
 
 function Eliminarusuario(id) {

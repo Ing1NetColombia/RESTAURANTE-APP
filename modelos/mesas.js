@@ -10,7 +10,7 @@ function guardarmesa() {
         Swal.fire({
             title: "Error",
             text: "Favor de llenar todos los campos.",
-            icon: "success"
+            icon: "warning"
         });
         //alert("Favor de llenar todos los campos");
         return;
@@ -26,7 +26,7 @@ function guardarmesa() {
         Swal.fire({
             title: "Error",
             text: "Producto ya existe.",
-            icon: "success"
+            icon: "warning"
         });
         return;
     }
@@ -78,14 +78,23 @@ function Leermesa(elem) {
 
             case 'select':
                 var selMesa = document.getElementById("idmesa");
-    
+                id_zona = tblMesas = document.getElementById("idzona").value;
+
                 selMesa.innerHTML = "";
-                mesa.forEach(function (mesas) {
-                    if(mesas.estado == "1"){
-                        var cadena = `<option value="${mesas.idmesas}">${mesas.descripcion}</optrion>`;
-                        selMesa.innerHTML += cadena;
-                    }
-                });
+                if(id_zona){
+                    mesa.forEach(function (mesas) {
+                        if(mesas.estado == "1" && mesas.idzona == id_zona){
+                            var cadena = `<option value="${mesas.idmesas}">${mesas.descripcion}</optrion>`;
+                            selMesa.innerHTML += cadena;
+                        }
+                    });
+                }else{
+                    Swal.fire({
+                        title: "Error",
+                        text: "No ha seleccionado una zona.",
+                        icon: "warning"
+                    });
+                }
                 break
     }
 }
@@ -93,7 +102,7 @@ function Leermesa(elem) {
 function EditarMesa(id) {
     var mesa = JSON.parse(localStorage.getItem("mesas")) || [];
 
-    var mesas = produc.find(function (mesas) {
+    var mesas = mesa.find(function (mesas) {
         return mesas.idmesas == id;
     });
 
@@ -102,10 +111,12 @@ function EditarMesa(id) {
     var objpuestos = document.getElementById("puestos");
     var objestado = document.getElementById("estado");
 
-    objid.value = producto.idmesas;
-    objdescripcion.value = producto.descripcion
-    objpuestos.value = producto.puestos
-    objestado.value = producto.estado;
+    objid.value = mesas.idmesas;
+    objdescripcion.value = mesas.descripcion
+    objpuestos.value = mesas.puestos
+    objestado.value = mesas.estado;
+    
+    mostrarform('mesas',true)
 }
 
 function EliminarMesa(id) {
@@ -117,20 +128,4 @@ function EliminarMesa(id) {
 
     localStorage.setItem("mesas", JSON.stringify(mesaFiltrados));
     Leerproductos('table');
-}
-
-//Función mostrar formulario
-function mostrarform(flag) {
-    limpiar();
-    if (flag) {
-        $("#listadoregistros").hide();
-        $("#formularioregistros").show();
-        $("#btnGuardar").prop("disabled", false);
-        $("#btnagregar").hide();
-    }
-    else {
-        $("#listadoregistros").show();
-        $("#formularioregistros").hide();
-        $("#btnagregar").show();
-    }
 }

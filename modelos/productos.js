@@ -166,14 +166,17 @@ function EditarProducto(id) {
     var objdescripcion = document.getElementById("descripcion");
     var objvalor = document.getElementById("valor");
     var objcategoria = document.getElementById("idcategoria");
-    var objrecomendado = document.getElementById("recomendado");
+    var objimgprev = document.getElementById("imgprev");
+    //var objrecomendado = document.getElementById("recomendado");
 
     objid.value = producto.idproducto;
     objnombre.value = producto.nomproducto;
-    objdescripcion.value = producto.descripcion
-    objvalor.value = producto.valor
-    objcategoria.value = producto.idcategoria
-    objrecomendado.value = producto.recomendado;
+    objdescripcion.value = producto.descripcion;
+    objvalor.value = producto.valor;
+    objcategoria.value = producto.idcategoria;
+    objimgprev.src = producto.imgproduc;
+    //objrecomendado.value = producto.recomendado;
+    mostrarform('productos',false)
 }
 
 function EliminarProducto(id) {
@@ -185,20 +188,4 @@ function EliminarProducto(id) {
 
     localStorage.setItem("produc", JSON.stringify(productosFiltrados));
     Leerproductos('table');
-}
-
-//Función mostrar formulario
-function mostrarform(flag) {
-    limpiar();
-    if (flag) {
-        $("#listadoregistros").hide();
-        $("#formularioregistros").show();
-        $("#btnGuardar").prop("disabled", false);
-        $("#btnagregar").hide();
-    }
-    else {
-        $("#listadoregistros").show();
-        $("#formularioregistros").hide();
-        $("#btnagregar").show();
-    }
 }
