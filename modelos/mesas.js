@@ -1,14 +1,12 @@
-function guardarproducto() {
-    let id = document.getElementById("idproducto").value;
-    let nombre = document.getElementById("nomproducto").value;
+function guardarmesa() {
+    let id = document.getElementById("idmesas").value;
     let descripcion = document.getElementById("descripcion").value;
-    let valor = document.getElementById("valor").value;
-    let categoria = document.getElementById("idcategoria").value;
-    let recomendado = document.querySelector('input[name="recomendado"]:checked').value;
-    //let recomendado = document.getElementById("recomendado").value;
+    let zona = document.getElementById("idzona").value;
+    let puestos = document.getElementById("puestos").value;
 
-    if (id == '' || nombre == '' || descripcion == '' || valor == '' || categoria == '' || recomendado == '') {
-        localStorage.removeItem("objImage");
+    let estado = document.querySelector('input[name="estado"]:checked').value;
+   
+    if (id == '' || descripcion == '' || puestos == '' || estado == '' || zona == '') {
         Swal.fire({
             title: "Error",
             text: "Favor de llenar todos los campos.",
@@ -18,34 +16,27 @@ function guardarproducto() {
         return;
     }
 
-    var imgproduc = localStorage.getItem("objImage") || [];
-    var produc = JSON.parse(localStorage.getItem("produc")) || [];
+    var mesa = JSON.parse(localStorage.getItem("mesas")) || [];
 
-    var a_produtos = produc.filter(function (produc_f) {
-        return (produc_f.idproducto == id);
+    var a_mesas = mesa.filter(function (mesas_f) {
+        return (mesas_f.idmesas == id);
     });
 
-    if (a_produtos.length > 0) {
-        localStorage.removeItem("objImage");
+    if (a_mesas.length > 0) {
         Swal.fire({
             title: "Error",
             text: "Producto ya existe.",
             icon: "success"
         });
-        //alert("Producto ya existe");
         return;
     }
 
-    let produc_r = {
-        "idproducto": id, "nomproducto": nombre, "descripcion": descripcion,
-        "valor": valor, "idcategoria": categoria, "recomendado": recomendado,
-        "imgproduc":imgproduc
+    let mesas_r = {
+        "idmesas": id, "descripcion": descripcion,"puestos": puestos, "idzona": zona, "estado": estado
     }
+    mesa.push(mesas_r);
 
-    produc.push(produc_r);
-
-    localStorage.setItem("produc", JSON.stringify(produc));
-    localStorage.removeItem("objImage");
+    localStorage.setItem("mesas", JSON.stringify(mesa));
 
     Swal.fire({
         title: "Completo",
@@ -56,134 +47,75 @@ function guardarproducto() {
 
 }
 
-function Leerproductos(elem) {
-    var produc = JSON.parse(localStorage.getItem("produc")) || [];
+function Leermesa(elem) {
+    var mesa = JSON.parse(localStorage.getItem("mesas")) || [];
 
     switch (elem) {
         case 'table':
-            var tblProductos = document.getElementById("tblproductos");
+            var tblMesas = document.getElementById("tblMesas");
 
-            tblProductos.innerHTML = "";
-            produc.forEach(function (producto) {
-                let imgproduc = producto.imgproduc.length == []? 'files/img/no img.png':producto.imgproduc;
+            tblMesas.innerHTML = "";
+            mesa.forEach(function (mesas) {
                 var cadena = `<tr>
                                     <td>
-                                        <button class="btn btn-primary" onclick="EditarProducto(${producto.idproducto})">
+                                        <button class="btn btn-primary" onclick="EditarMesa(${mesas.idmesas})">
                                             Editar 
                                         </button>
                                         
-                                        <button class="btn btn-warning" onclick="EliminarProducto(${producto.idproducto})">
+                                        <button class="btn btn-warning" onclick="EliminarMesa(${mesas.idmesas})">
                                             Eliminar 
                                         </button>
                                     </td>
-                                    <td>${producto.idproducto}</td>
-                                    <td>${producto.nomproducto}</td>
-                                    <td>${producto.descripcion}</td>
-                                    <td>${producto.idcategoria}</td> 
-                                    <td>${producto.valor}</td>
-                                    <td>${producto.recomendado}</td>
-                                    <td><img src=${imgproduc} style="max-width: 50px;"
-                                    alt="Item Image"></td>
+                                    <td>${mesas.idmesas}</td>
+                                    <td>${mesas.descripcion}</td>
+                                    <td>${mesas.puestos}</td>
+                                    <td>${mesas.idzona}</td>
+                                    <td>${mesas.estado}</td> 
                                 </tr>`;
-                tblProductos.innerHTML += cadena;
+                tblMesas.innerHTML += cadena;
             });
             break
 
-        case 'card':
-            var CardProductos = document.getElementById("CardProductos");
-
-            if (produc.length == []) {
+            case 'select':
+                var selMesa = document.getElementById("idmesa");
+    
+                selMesa.innerHTML = "";
+                mesa.forEach(function (mesas) {
+                    if(mesas.estado == "1"){
+                        var cadena = `<option value="${mesas.idmesas}">${mesas.descripcion}</optrion>`;
+                        selMesa.innerHTML += cadena;
+                    }
+                });
                 break
-            }
-            
-            CardProductos.innerHTML = "";
-            produc.forEach(function (producto) {
-                let imgproduc = producto.imgproduc.length == []? 'files/img/no img.png':producto.imgproduc;
-                var cadena = `<div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                                    <img src="${imgproduc}" class="img-fluid rounded-circle" style="width: 170px; height: 170px;" alt="Item Image">
-                                                </div>
-                                                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                                    <h3 class="card-title">${producto.nomproducto}</h3>
-                                                    <p class="card-text">${producto.descripcion}</p>
-                                                    <p class="card-text">Precio: $${producto.valor}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>`;
-                CardProductos.innerHTML += cadena;
-            });
-            break
-
-        case 'card2':
-
-            var CardProductos = document.getElementById("CardProductos");
-
-            if (produc.length == []) {
-                break
-            }
-
-            CardProductos.innerHTML = "";
-            produc.forEach(function (producto) {
-                if (producto.recomendado == "1") {
-                    let imgproduc = producto.imgproduc.length == []? 'files/img/no img.png':producto.imgproduc;
-                    var cadena = `<div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                                        <img src="${imgproduc}" class="img-fluid rounded-circle" style="width: 170px; height: 170px;" alt="Item Image">
-                                                    </div>
-                                                    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                                        <h3 class="card-title">${producto.nomproducto}</h3>
-                                                        <p class="card-text">${producto.descripcion}</p>
-                                                        <p class="card-text">Precio: $${producto.valor}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>`;
-                    CardProductos.innerHTML += cadena;
-                }
-            });
-            break
     }
 }
 
-function EditarProducto(id) {
-    var produc = JSON.parse(localStorage.getItem("produc")) || [];
+function EditarMesa(id) {
+    var mesa = JSON.parse(localStorage.getItem("mesas")) || [];
 
-    var producto = produc.find(function (producto) {
-        return producto.idproducto == id;
+    var mesas = produc.find(function (mesas) {
+        return mesas.idmesas == id;
     });
 
-    var objid = document.getElementById("idproducto");
-    var objnombre = document.getElementById("nomproducto");
+    var objid = document.getElementById("idmesas");
     var objdescripcion = document.getElementById("descripcion");
-    var objvalor = document.getElementById("valor");
-    var objcategoria = document.getElementById("idcategoria");
-    var objrecomendado = document.getElementById("recomendado");
+    var objpuestos = document.getElementById("puestos");
+    var objestado = document.getElementById("estado");
 
-    objid.value = producto.idproducto;
-    objnombre.value = producto.nomproducto;
+    objid.value = producto.idmesas;
     objdescripcion.value = producto.descripcion
-    objvalor.value = producto.valor
-    objcategoria.value = producto.idcategoria
-    objrecomendado.value = producto.recomendado;
+    objpuestos.value = producto.puestos
+    objestado.value = producto.estado;
 }
 
-function EliminarProducto(id) {
-    var produc = JSON.parse(localStorage.getItem("produc")) || [];
+function EliminarMesa(id) {
+    var mesa = JSON.parse(localStorage.getItem("mesas")) || [];
 
-    var productosFiltrados = produc.filter(function (producto) {
-        return producto.idproducto != id;
+    var mesaFiltrados = mesa.filter(function (mesas) {
+        return mesas.idmesas != id;
     });
 
-    localStorage.setItem("produc", JSON.stringify(productosFiltrados));
+    localStorage.setItem("mesas", JSON.stringify(mesaFiltrados));
     Leerproductos('table');
 }
 

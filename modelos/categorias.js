@@ -58,11 +58,11 @@ function Leercategoria(elem) {
                 
                 var cadena = `<tr>
                                     <td>
-                                        <button class="btn btn-primary" onclick="EditarCategoria(${producto.idproducto})">
+                                        <button class="btn btn-primary" onclick="EditarCategoria(${categotia.idcategoria})">
                                             Editar 
                                         </button>
                                         
-                                        <button class="btn btn-warning" onclick="EliminarCategoria(${producto.idproducto})">
+                                        <button class="btn btn-warning" onclick="EliminarCategoria(${categotia.idcategoria})">
                                             Eliminar 
                                         </button>
                                     </td>
@@ -79,7 +79,7 @@ function Leercategoria(elem) {
 
             selCategoria.innerHTML = "";
             catego.forEach(function (categotia) {
-                if(categotia.estado == "si"){
+                if(categotia.estado == "1"){
                     var cadena = `<option value="${categotia.idcategoria}">${categotia.nomcategoria}</optrion>`;
                     selCategoria.innerHTML += cadena;
                 }

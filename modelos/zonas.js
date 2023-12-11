@@ -1,14 +1,10 @@
-function guardarproducto() {
-    let id = document.getElementById("idproducto").value;
-    let nombre = document.getElementById("nomproducto").value;
+function guardarzona() {
+    let id = document.getElementById("idzona").value;
     let descripcion = document.getElementById("descripcion").value;
-    let valor = document.getElementById("valor").value;
-    let categoria = document.getElementById("idcategoria").value;
-    let recomendado = document.querySelector('input[name="recomendado"]:checked').value;
+    let estado = document.querySelector('input[name="estado"]:checked').value;
     //let recomendado = document.getElementById("recomendado").value;
 
-    if (id == '' || nombre == '' || descripcion == '' || valor == '' || categoria == '' || recomendado == '') {
-        localStorage.removeItem("objImage");
+    if (id == '' || descripcion == '' || estado == '') {
         Swal.fire({
             title: "Error",
             text: "Favor de llenar todos los campos.",
@@ -18,34 +14,27 @@ function guardarproducto() {
         return;
     }
 
-    var imgproduc = localStorage.getItem("objImage") || [];
-    var produc = JSON.parse(localStorage.getItem("produc")) || [];
+    var zona = JSON.parse(localStorage.getItem("zonas")) || [];
 
-    var a_produtos = produc.filter(function (produc_f) {
-        return (produc_f.idproducto == id);
+    var a_zonas = zona.filter(function (zonas_f) {
+        return (zonas_f.idzona == id);
     });
 
-    if (a_produtos.length > 0) {
-        localStorage.removeItem("objImage");
+    if (a_zonas.length > 0) {
         Swal.fire({
             title: "Error",
-            text: "Producto ya existe.",
+            text: "Zona ya existe.",
             icon: "success"
         });
-        //alert("Producto ya existe");
         return;
     }
 
-    let produc_r = {
-        "idproducto": id, "nomproducto": nombre, "descripcion": descripcion,
-        "valor": valor, "idcategoria": categoria, "recomendado": recomendado,
-        "imgproduc":imgproduc
+    let zonas_r = {
+        "idzona": id, "descripcion": descripcion,"estado": estado,
     }
+    zona.push(zonas_r);
 
-    produc.push(produc_r);
-
-    localStorage.setItem("produc", JSON.stringify(produc));
-    localStorage.removeItem("objImage");
+    localStorage.setItem("zonas", JSON.stringify(zona));
 
     Swal.fire({
         title: "Completo",
@@ -56,135 +45,73 @@ function guardarproducto() {
 
 }
 
-function Leerproductos(elem) {
-    var produc = JSON.parse(localStorage.getItem("produc")) || [];
+function Leerzona(elem) {
+    var zona = JSON.parse(localStorage.getItem("zonas")) || [];
 
     switch (elem) {
         case 'table':
-            var tblProductos = document.getElementById("tblproductos");
+            var tblZonas = document.getElementById("tblZonas");
 
-            tblProductos.innerHTML = "";
-            produc.forEach(function (producto) {
-                let imgproduc = producto.imgproduc.length == []? 'files/img/no img.png':producto.imgproduc;
+            tblZonas.innerHTML = "";
+            zona.forEach(function (zonas) {
+                
                 var cadena = `<tr>
                                     <td>
-                                        <button class="btn btn-primary" onclick="EditarProducto(${producto.idproducto})">
+                                        <button class="btn btn-primary" onclick="EditarZona(${zonas.idzona})">
                                             Editar 
                                         </button>
                                         
-                                        <button class="btn btn-warning" onclick="EliminarProducto(${producto.idproducto})">
+                                        <button class="btn btn-warning" onclick="EliminarZona(${zonas.idzona})">
                                             Eliminar 
                                         </button>
                                     </td>
-                                    <td>${producto.idproducto}</td>
-                                    <td>${producto.nomproducto}</td>
-                                    <td>${producto.descripcion}</td>
-                                    <td>${producto.idcategoria}</td> 
-                                    <td>${producto.valor}</td>
-                                    <td>${producto.recomendado}</td>
-                                    <td><img src=${imgproduc} style="max-width: 50px;"
-                                    alt="Item Image"></td>
+                                    <td>${zonas.idzona}</td>
+                                    <td>${zonas.descripcion}</td>
+                                    <td>${zonas.estado}</td>
                                 </tr>`;
-                tblProductos.innerHTML += cadena;
+                tblZonas.innerHTML += cadena;
             });
             break
 
-        case 'card':
-            var CardProductos = document.getElementById("CardProductos");
+        case 'select':
+            var selZonas = document.getElementById("idzona");
 
-            if (produc.length == []) {
-                break
-            }
-            
-            CardProductos.innerHTML = "";
-            produc.forEach(function (producto) {
-                let imgproduc = producto.imgproduc.length == []? 'files/img/no img.png':producto.imgproduc;
-                var cadena = `<div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                                    <img src="${imgproduc}" class="img-fluid rounded-circle" style="width: 170px; height: 170px;" alt="Item Image">
-                                                </div>
-                                                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                                    <h3 class="card-title">${producto.nomproducto}</h3>
-                                                    <p class="card-text">${producto.descripcion}</p>
-                                                    <p class="card-text">Precio: $${producto.valor}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>`;
-                CardProductos.innerHTML += cadena;
-            });
-            break
-
-        case 'card2':
-
-            var CardProductos = document.getElementById("CardProductos");
-
-            if (produc.length == []) {
-                break
-            }
-
-            CardProductos.innerHTML = "";
-            produc.forEach(function (producto) {
-                if (producto.recomendado == "1") {
-                    let imgproduc = producto.imgproduc.length == []? 'files/img/no img.png':producto.imgproduc;
-                    var cadena = `<div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                                        <img src="${imgproduc}" class="img-fluid rounded-circle" style="width: 170px; height: 170px;" alt="Item Image">
-                                                    </div>
-                                                    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                                        <h3 class="card-title">${producto.nomproducto}</h3>
-                                                        <p class="card-text">${producto.descripcion}</p>
-                                                        <p class="card-text">Precio: $${producto.valor}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>`;
-                    CardProductos.innerHTML += cadena;
+            selZonas.innerHTML = "";
+            zona.forEach(function (zonas) {
+                if(zonas.estado == "1"){
+                    var cadena = `<option value="${zonas.idzona}">${zonas.descripcion}</optrion>`;
+                    selZonas.innerHTML += cadena;
                 }
             });
             break
     }
 }
 
-function EditarProducto(id) {
-    var produc = JSON.parse(localStorage.getItem("produc")) || [];
+function EditarZona(id) {
+    var zona = JSON.parse(localStorage.getItem("zonas")) || [];
 
-    var producto = produc.find(function (producto) {
-        return producto.idproducto == id;
+    var zonas = zona.find(function (zonas) {
+        return zonas.idzona == id;
     });
 
-    var objid = document.getElementById("idproducto");
-    var objnombre = document.getElementById("nomproducto");
+    var objid = document.getElementById("idzona");
     var objdescripcion = document.getElementById("descripcion");
-    var objvalor = document.getElementById("valor");
-    var objcategoria = document.getElementById("idcategoria");
-    var objrecomendado = document.getElementById("recomendado");
+    var objestado = document.getElementById("estado");
 
-    objid.value = producto.idproducto;
-    objnombre.value = producto.nomproducto;
-    objdescripcion.value = producto.descripcion
-    objvalor.value = producto.valor
-    objcategoria.value = producto.idcategoria
-    objrecomendado.value = producto.recomendado;
+    objid.value = zonas.idzona;
+    objdescripcion.value = zonas.descripcion
+    objestado.value = zonas.estado;
 }
 
-function EliminarProducto(id) {
-    var produc = JSON.parse(localStorage.getItem("produc")) || [];
+function EliminarZona(id) {
+    var zona = JSON.parse(localStorage.getItem("zonas")) || [];
 
-    var productosFiltrados = produc.filter(function (producto) {
-        return producto.idproducto != id;
+    var zonasFiltrados = zona.filter(function (zonas) {
+        return zonas.idzona != id;
     });
 
-    localStorage.setItem("produc", JSON.stringify(productosFiltrados));
-    Leerproductos('table');
+    localStorage.setItem("zonas", JSON.stringify(zonasFiltrados));
+    Leerzona('table');
 }
 
 //Función mostrar formulario

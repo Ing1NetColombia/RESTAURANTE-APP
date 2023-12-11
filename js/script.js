@@ -40,6 +40,12 @@ function CargarContenido(url, div, from) {
                 case "categoria":
                     Leercategoria('table');
                     break
+                case "zonas":
+                    Leerzona('table');
+                    break
+                case "mesas":
+                    Leermesa('table');
+                    break
             }
 
         })

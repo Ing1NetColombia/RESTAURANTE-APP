@@ -38,9 +38,15 @@
                                 <div class="row">
 
                                     <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <label>codigo(*):</label>
+                                        <label>Codigo(*):</label>
                                         <input type="text" class="form-control" id="idmesas" maxlength="80"
                                             placeholder="Codigo">
+                                    </div>                                    
+
+                                    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <label>Descripcion(*):</label>
+                                        <input type="text" class="form-control" id="descripcion" maxlength="80"
+                                            placeholder="Descripcion">
                                     </div>
 
                                     <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -50,18 +56,9 @@
                                     </div>
 
                                     <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <label>descripcion(*):</label>
-                                        <input type="text" class="form-control" id="descripcion" maxlength="80"
-                                            placeholder="Descripcion">
-                                    </div>
-
-                                    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <label>Zonas:</label>
                                         <select name="idzona" id="idzona" class="form-control selectpicker"
-                                            data-live-search="true" data>
-                                            <option value="1">balcon</optrion>
-                                            <option value="2">interior</option>
-                                            <option value="3">esterior</option>
+                                            data-live-search="true" onclick="Leerzona('select')" data>
                                         </select>
                                     </div>
 
@@ -78,7 +75,7 @@
                                 </div>
 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <button class="btn btn-primary" onclick="guardarzona()">Guardar</button>
+                                    <button class="btn btn-primary" onclick="guardarmesa()">Guardar</button>
 
                                     <button class="btn btn-danger" onclick="cancelarform()"
                                         type="button">Cancelar</button>

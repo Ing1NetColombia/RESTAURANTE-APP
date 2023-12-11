@@ -1,19 +1,28 @@
-var sesion = []; // se sion de usuario
+var sesion = []; // sesion de usuario
 
 function Sesionusu() {
     sesion = JSON.parse(localStorage.getItem("sesion")) || [];
-    var imglog = sesion.imguser;
     var txtuser = sesion.usuario;
+    var imglog = sesion.imguser == null ? "files/usuarios/user.png":sesion.imguser == ''?"files/usuarios/user.png":sesion.imguser;
     
     if (Object.keys(sesion).length === 0){
         let sesion= { "idusuario":null, "usuario":null, "email":null, "telefono":null, "imguser":null, "rol":null }
         localStorage.setItem("sesion", JSON.stringify(sesion));
     }
 
-    if(!sesion.idusuario){
-        var imglog = "files/usuarios/user.png";
-        var txtuser = "Iniciar Sesion";
+    var user = JSON.parse(localStorage.getItem("user")) || [];
+    if (Object.keys(user).length === 0){
+        let user_a = { "idusuario":'admin', "nomusuario":'admin', "usuario":'admin', "webcontrasena":'admin', "email":'admin@admin.com', "telefono":'', "imguser":'',"rol":'admin' }
+        user.push(user_a);
+        localStorage.setItem("user", JSON.stringify(user));
     }
+
+    if(!sesion.idusuario){
+        var txtuser = "Iniciar Sesion";
+        var imglog = "files/usuarios/user.png";
+    }
+
+    
 
     /*const objuser = document.getElementById("txt_user")
     var text = document.createTextNode(txtuser);
@@ -29,11 +38,14 @@ function Sesionusu() {
 function logusu(elem){
     setTimeout(() => {
         if (elem) {
-            var imglog = sesion.imguser;
+            var imglog = sesion.imguser == '' ? "files/usuarios/user.png":sesion.imguser;
             var txtemail = sesion.email;
+
             document.getElementById("loguser").style.display = 'block';
             document.getElementById("iniuser").style.display = 'none';
             document.getElementById("claveuser").style.display = 'none';
+            document.getElementById("btncnf").style.display = sesion.rol == "admin" ? 'block':'none';
+
         } else {
             var imglog = "files/usuarios/user.png";
             var txtemail = "";
